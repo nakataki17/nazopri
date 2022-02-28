@@ -26,4 +26,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### deploy to github pages(after build)
 npm run deploy
 
-gh-pagesへのデプロイはhttps://zenn.dev/sohhakasaka/articles/3e386fa9a650cdを参考にしてください
+gh-pagesへのデプロイはhttps://zenn.dev/sohhakasaka/articles/3e386fa9a650cd を参考にしてください
