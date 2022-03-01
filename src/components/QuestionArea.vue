@@ -1,10 +1,11 @@
 <template>
-    <div class="Question">
+    <div class="w-full">
+      <img class="object-contain" src="@/assets/sampleQuestion.png" alt="">
     </div>
 </template>
 
 <script>
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, } from "vue";
 
 export default defineComponent({
   name: "QuestionArea",
