@@ -1,7 +1,7 @@
 <template>
-  <div class="camera">
-    <video ref="video" autoplay width="900" height="1200"></video>
-  </div>
+    <div class="camera">
+      <video ref="video" playsinline autoplay></video>
+    </div>
 </template>
 
 <script>
