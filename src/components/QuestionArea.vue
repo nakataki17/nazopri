@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full">
-      <img class="object-contain" src="@/assets/sampleQuestion.png" alt="">
+    <div class="h-full">
+      <img class="object-contain h-full" src="@/assets/sampleQuestion.png" alt="">
     </div>
 </template>
 
