@@ -1,10 +1,10 @@
 <template>
-  <NavigationBar/>
   <main class="flex flex-wrap h-screen">
-    <div class="h-full hover:lg:w-1/2  mx-auto">
+    <NavigationBar/>
+    <div class="h-5/6 hover:lg:w-1/2  mx-auto">
       <QuestionArea />
     </div>
-    <div class="h-full lg:w-1/2  text-center mx-auto">
+    <div class="h-5/6 lg:w-1/2  text-center mx-auto">
       <CameraArea />
     </div>
   </main>

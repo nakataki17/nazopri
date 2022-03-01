@@ -1,6 +1,6 @@
 <template>
     <div class="w-full camera m-auto text-center">
-      <video ref="video" class="text-center mx-auto" playsinline autoplay></video>
+      <video ref="video" id="camera" class="text-center mx-auto " playsinline autoplay></video>
       <button type="button" class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Snap! (or just push Q)</button>
 
     </div>
@@ -23,8 +23,8 @@ export default defineComponent({
         navigator.mediaDevices.getUserMedia({
           video:{
         facingMode: facing,
-        width:{ideal:750},
-        height:{ideal:900}
+        width:{ideal:650},
+        height:{ideal:780}
       },
           audio: false,
         }).then(stream => {

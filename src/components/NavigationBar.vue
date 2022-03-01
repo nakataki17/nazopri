@@ -1,6 +1,6 @@
 <template>
 
-<nav class="bg-gray-100 mb-2 h-14 px-2 sm:px-4  rounded dark:bg-gray-800  top-0 z-50 shadow">
+<nav class="w-full bg-gray-100 mb-2 h-14 px-2 sm:px-4  rounded dark:bg-gray-800  top-0 z-50 shadow">
 <div class="h-full container flex flex-wrap justify-between items-center mx-auto">
   <a href="#" class="h-14 flex items-center">
   <img src="@/assets/logo.png" class="h-full object-contain" alt="Logo">
