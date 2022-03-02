@@ -1,49 +1,34 @@
 <template>
-    <div class="h-full w-full text-center">
-      <img class="w-5/6 text-center object-contain mx-auto"  v-bind:src="imgSrc(course.value,qno.value)" alt="">
+    <div class="w-5/6 h-full mx-auto text-center">
+      <img class=" text-center  mx-auto"  v-bind:src="imgSrc(course,qno)" alt="">
     </div>
 </template>
 
 <script>
-import { defineComponent, onMounted,ref } from "vue";
+import { defineComponent, onMounted, } from "vue";
 
 export default defineComponent({
   name: "QuestionArea",
+  props:{
+    course: String,
+    qno: String,
+    qcnt: Object,
+    keyboardPress: Function,
+  },
 
-  setup() {
-    const keyboardPress = (e) => {
-      const code = e.code
-      switch (code){
-        case "KeyW":
-          console.log("Q+")
-          qno.value++
-          break
-        case "KeyS":
-          console.log("Q-")
-          qno.value--
-          if(qno.value<=0){qno.value=0}
-          break
-        case "Space":
-          console.log("Photo")
-      }
-    }
-
+  setup(props) {
+    console.log(props)
     onMounted(() => {
-      document.addEventListener("keydown",keyboardPress)
+      document.addEventListener("keydown",props.keyboardPress)
     })
 
     const imgSrc = ()=>{
-      console.log(require("@/assets/"+"Cute"+"/3.png"))
-      return require("@/assets/"+course.value+"/"+qno.value+".png")
+      console.log("@/assets/"+props.course+"/"+props.qno+".png")
+      return require("@/assets/"+props.course+"/"+props.qno+".png")
     }
-    
-    let course = ref("Cute")
-    let qno = ref("1")
-
+  
     return{
      imgSrc, 
-     course,
-     qno
     }
   },
 })

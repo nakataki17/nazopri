@@ -1,7 +1,7 @@
 <template>
     <div class="w-full camera m-auto text-center ">
       <video ref="video" id="camera" class="lg:w-3/5 h-full text-center mx-auto object-fill" playsinline autoplay></video>
-      <button type="button" class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Snap! (or just push Q)</button>
+      <button type="button" class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Snap! (or just press Q)</button>
 
     </div>
       <!-- 撮影ボタンとかはここで実装したほうが楽そう -->
@@ -14,7 +14,13 @@ import { defineComponent, onMounted, ref } from "vue";
 export default defineComponent({
   name: "CameraArea",
 
+
   setup() {
+    const shutter= (()=>{
+      console.log(1)
+    })
+
+    shutter()
     const video = ref()
     onMounted(() => {
       //カメラの向き。基本はenvironment(外カメ)
@@ -36,6 +42,8 @@ export default defineComponent({
         });
       }
     });
+
+
 
     return {
       video,
