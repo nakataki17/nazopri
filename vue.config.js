@@ -5,5 +5,12 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer:{
     https:true,
+  },
+  pages: {
+    index:{
+      entry:"src/main.js",
+      title:"ナゾプリ"
+    }
   }
+
 })
