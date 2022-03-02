@@ -2,7 +2,7 @@
   <NavigationBar/>
   <main class="flex flex-wrap h-full">
     <div></div>
-      <div class="h-5/6 hover:lg:w-1/2  mx-auto">
+      <div class="h-5/6 lg:w-1/2  mx-auto">
         <QuestionArea />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">

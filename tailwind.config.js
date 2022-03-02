@@ -1,5 +1,6 @@
 module.exports = {
-  purge:["./index.html","./src/**/*.{vue,js,ts,jsx,tsx}"],
+  mode:"jit",
+  purge:["./public/index.html","./src/App.vue","./src/**/*.{vue,js,ts,jsx,tsx}"],
   content: [],
   theme: {
     extend: {},
@@ -9,5 +10,5 @@ module.exports = {
       ]
     }
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
