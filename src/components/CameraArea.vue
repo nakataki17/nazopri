@@ -41,7 +41,6 @@ export default defineComponent({
         canvas.value.getContext("2d").drawImage(video.value,0,0,)
         let photo = canvas.value.toDataURL("image/png")
         context.emit("tookPhoto",photo)
-        console.log(photo)
       }
     })
 
