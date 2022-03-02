@@ -3,10 +3,10 @@
   <main class="flex flex-wrap h-full">
     <div></div>
       <div class="h-5/6 lg:w-1/2  mx-auto">
-        <QuestionArea :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress"/>
+        <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress"/>
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
-        <CameraArea />
+        <CameraArea @tookPhoto="saveImage" :latastImage="latastImage" />
       </div>
   </main>
 
@@ -32,6 +32,11 @@ export default defineComponent({
     let qcnt = ref({
       "Cute":12,
     })
+    let latastImage = ref("")
+
+    const saveImage = (e) =>{
+      latastImage.value = e 
+    }
     
     const keyboardPress = (e) => { 
       const code = e.code
@@ -48,16 +53,17 @@ export default defineComponent({
           qno.value--
           if(qno.value<=0){qno.value=1}
           break
-        case "Space":
-          console.log("Photo")
       }
     }
+    document.addEventListener("keydown",keyboardPress)
 
     return{
       keyboardPress,
       course,
       qno,
-      qcnt
+      qcnt,
+      saveImage,
+      latastImage
     }
   }
 })
