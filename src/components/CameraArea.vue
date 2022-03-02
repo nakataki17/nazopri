@@ -23,8 +23,9 @@ export default defineComponent({
         navigator.mediaDevices.getUserMedia({
           video:{
         facingMode: facing,
-        width:{min:1080},
-        height:{min:1620,ideal:1620}
+        width:{min:480,ideal:1080},
+        height:{min:720,ideal:1620},
+        aspectRatio:2/3
       },
           audio: false,
         }).then(stream => {
