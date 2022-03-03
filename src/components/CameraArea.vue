@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-      <!--モーダルの中身-->
+      <!--モーダルの中身ここまで-->
     </div>
     <canvas ref="canvas" id="canvas" class="invisible fixed left-0 top-0"></canvas>
 
@@ -41,7 +41,7 @@ export default defineComponent({
         canvas.value.height = Math.max(200, video.value.videoHeight)
         console.log(video.value.videoWidth+"width")
         console.log("Pasha!")
-        
+        console.log(props.playsSound)
         video.value.pause();  
         setTimeout( () => {
           video.value.play(); 

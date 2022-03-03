@@ -1,12 +1,12 @@
 <template>
-  <NavigationBar/>
+  <NavigationBar  v-bind="{playsSound,stopTime,course}" v-on="{'update:config':updateConfig}"/>
   <main class="flex flex-wrap h-full">
     <div></div>
       <div class="h-5/6 lg:w-1/2  mx-auto">
         <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
-        <CameraArea @tookPhoto="saveImage" :latastImage="latastImage" :playsSound="playsSound" :stopTime="stopTime"/>
+        <CameraArea @tookPhoto="saveImage" :latastImage="latastImage" />
       </div>
   </main>
 
@@ -26,13 +26,13 @@ export default defineComponent({
     QuestionArea,
   },
   setup(){   
-    //この辺はconfigでいじれるようになりたい
-    let course = ref("Cute")
     let qno = ref("1")
     //枚数
     let qcnt = ref({
       "Cute":12,
     })
+    //この辺はconfigでいじれるようになりたい
+    let course = ref("Cute")
     let playsSound = ref(true)
     let stopTime = ref(3000)
     let latastImage = ref("")
@@ -40,6 +40,15 @@ export default defineComponent({
     const saveImage = (e) =>{
       latastImage.value = e 
     }
+
+
+    const updateConfig = (e)=> {
+      course.value = e.course
+      playsSound.value = e.playsSound
+      stopTime.value = e.stopTime
+    }
+
+
     
     const keyboardPress = (e) => { 
       const code = e.code
@@ -69,6 +78,7 @@ export default defineComponent({
       latastImage,
       playsSound,
       stopTime,
+      updateConfig
     }
   }
 })
