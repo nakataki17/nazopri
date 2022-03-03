@@ -3,10 +3,10 @@
   <main class="flex flex-wrap h-full">
     <div></div>
       <div class="h-5/6 lg:w-1/2  mx-auto">
-        <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress"/>
+        <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
-        <CameraArea @tookPhoto="saveImage" :latastImage="latastImage" />
+        <CameraArea @tookPhoto="saveImage" :latastImage="latastImage" :playsSound="playsSound" :stopTime="stopTime"/>
       </div>
   </main>
 
@@ -29,11 +29,14 @@ export default defineComponent({
     //この辺はconfigでいじれるようになりたい
     let course = ref("Cute")
     let qno = ref("1")
+    //枚数
     let qcnt = ref({
       "Cute":12,
     })
+    let playsSound = ref(true)
+    let stopTime = ref(3000)
     let latastImage = ref("")
-
+  
     const saveImage = (e) =>{
       latastImage.value = e 
     }
@@ -63,7 +66,9 @@ export default defineComponent({
       qno,
       qcnt,
       saveImage,
-      latastImage
+      latastImage,
+      playsSound,
+      stopTime,
     }
   }
 })

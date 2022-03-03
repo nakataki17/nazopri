@@ -14,7 +14,7 @@
         </div>
       <!--モーダルの中身-->
     </div>
-    <canvas ref="canvas" id="canvas" class="invisible"></canvas>
+    <canvas ref="canvas" id="canvas" class="invisible fixed left-0 top-0"></canvas>
 
 </template>
 
@@ -25,22 +25,39 @@ export default defineComponent({
   name: "CameraArea",
   props:{
     latastImage: String,
+    stopTime : Boolean,
+    playsSound : Boolean,
   },
   emits:["tookPhoto",],
   setup(props,context) {
     const video = ref()
     const canvas = ref()
+    const audio = new Audio(require("@/assets/shutter.mp3"))
 
     const takePhoto = ((e) =>{
-      canvas.value.width = Math.max(200, video.value.videoWidth)
-      canvas.value.height = Math.max(200, video.value.videoHeight)
-      console.log(video.value.videoWidth+"width")
       const code = e.code
       if(code == "KeyQ"){
+        canvas.value.width = Math.max(200, video.value.videoWidth)
+        canvas.value.height = Math.max(200, video.value.videoHeight)
+        console.log(video.value.videoWidth+"width")
         console.log("Pasha!")
+        
+        video.value.pause();  
+        setTimeout( () => {
+          video.value.play(); 
+        }, props.stopTime);//{stoptime=2000} msの停止
+        if(props.playsSound){
+          //シャッターの再生
+          //貨車ピンポン、貨車ブーは未実装
+          audio.play()
+        }
+
         canvas.value.getContext("2d").drawImage(video.value,0,0,)
         let photo = canvas.value.toDataURL("image/png")
         context.emit("tookPhoto",photo)
+
+
+
       }
     })
 
@@ -75,6 +92,7 @@ export default defineComponent({
 
     return {
       video,
+      audio,
       canvas,
       showPhoto,
     };
