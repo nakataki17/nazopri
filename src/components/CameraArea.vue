@@ -24,16 +24,16 @@ import { defineComponent, onMounted, ref } from "vue";
 export default defineComponent({
   name: "CameraArea",
   props:{
-    latastImage: String,
-    stopTime : Boolean,
+    stopTime : Number,
     playsSound : Boolean,
+    latastImage : String,
   },
   emits:["tookPhoto",],
   setup(props,context) {
     const video = ref()
     const canvas = ref()
     const audio = new Audio(require("@/assets/shutter.mp3"))
-
+    console.log(props)
     const takePhoto = ((e) =>{
       const code = e.code
       if(code == "KeyQ"){
@@ -41,7 +41,7 @@ export default defineComponent({
         canvas.value.height = Math.max(200, video.value.videoHeight)
         console.log(video.value.videoWidth+"width")
         console.log("Pasha!")
-        console.log(props.playsSound)
+        console.log(props)
         video.value.pause();  
         setTimeout( () => {
           video.value.play(); 
@@ -62,7 +62,7 @@ export default defineComponent({
     })
 
     const showPhoto = (()=>{
-      console.log(props.latastImage)
+      console.log("photo shown")
     })
 
     onMounted(() => {

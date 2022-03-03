@@ -1,0 +1,137 @@
+[33mcommit 53f9e5a90a64e642a5e7eef6952615d567a8ef2d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Fri Mar 4 01:48:31 2022 +0900
+
+    configまとめまえ
+
+[33mcommit d50b97043b9936464b0b023318350860b60b304d[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Thu Mar 3 23:53:45 2022 +0900
+
+    シャッター音の実装
+
+[33mcommit b328ed64fa5e116f58c198714d3164642ec4c8c8[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Thu Mar 3 01:53:00 2022 +0900
+
+    余計なlogを消去
+
+[33mcommit c443bf9867fb46d589a8575fb8770575919c9153[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Thu Mar 3 01:52:26 2022 +0900
+
+    build
+
+[33mcommit 4f8e92e3b422fa5777adfb7cdac41edcb55c6340[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Thu Mar 3 01:51:50 2022 +0900
+
+    画像を見るボタンの追加
+
+[33mcommit dd7151d5d38f269b27d6072183b2aacd32c1d448[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Thu Mar 3 00:54:40 2022 +0900
+
+    状態管理のApp.vueへの一元化
+
+[33mcommit 24d9d4d087c2fbfe74e41c3925826ef92b3122f8[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Wed Mar 2 20:59:55 2022 +0900
+
+    build
+
+[33mcommit 6cd9fe189db8c08788b8b00159948192bbd1d6bc[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Wed Mar 2 20:59:04 2022 +0900
+
+    アスヒ変更
+
+[33mcommit 6316107cb53a86862d91a6f995d2f3a875594f36[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Wed Mar 2 20:56:12 2022 +0900
+
+    画像おくり
+
+[33mcommit 4369be8ca886bfb35134aba942f5b8ef56565368[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Wed Mar 2 20:01:26 2022 +0900
+
+    縦横比の調整
+
+[33mcommit ffc9a7947d2e1e29b9024ba4d7456a4074d43b22[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Wed Mar 2 01:43:05 2022 +0900
+
+    カメラ配置変更
+
+[33mcommit ee604b38c95ec51a3d84f59ee347236ac1ed1dc2[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 22:17:00 2022 +0900
+
+    縦横比
+
+[33mcommit 9ee709933a8d52561a2405b5bddf905503b9cc64[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 21:32:12 2022 +0900
+
+    配置の見直し
+
+[33mcommit 70c7667fb01f872324019b854de0347a58e29351[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 21:20:39 2022 +0900
+
+    カメラ配置変更
+
+[33mcommit 4bc764d048dfe7d7b77c0d3cee347a9bab35576b[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 21:16:32 2022 +0900
+
+    配置の修正
+
+[33mcommit dfa1a7334de2e5f7d761f11579d80cc4a4b6881f[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 21:04:11 2022 +0900
+
+    buildしなおし
+
+[33mcommit ea4dedac57d72aad1e910469abd2663b52b3db28[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 21:03:35 2022 +0900
+
+    purge設定見直し
+
+[33mcommit 33421ae13b4fd58a433046b5d1bf07614aaf1f42[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 20:58:24 2022 +0900
+
+    buildして公開
+
+[33mcommit 7ae74b916f4c82739bbb73bcac9e93b67e899a0e[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 20:34:33 2022 +0900
+
+    navbar暫定完成
+
+[33mcommit b9dbfae77dbb27ff5eab5b8524e25882dd99a17a[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 18:15:02 2022 +0900
+
+    ナビゲーションバー
+
+[33mcommit 5da4acc34e953c66799a2e21ea5cf3563004bbda[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Tue Mar 1 01:01:40 2022 +0900
+
+    tailwindの導入とnavbarの準備
+
+[33mcommit 13c24aa5599ddf82c859e5bb3aba4c4b67b31307[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Mon Feb 28 17:23:18 2022 +0900
+
+    gh-pagesやtailwindの導入
+
+[33mcommit ee0ba661244f6b4b3b1bc43d218b9695d6983318[m
+Author: NNakata <detteiu.bloom@gmail.com>
+Date:   Mon Feb 28 00:49:12 2022 +0900
+
+    init

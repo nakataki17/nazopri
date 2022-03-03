@@ -1,12 +1,11 @@
 <template>
   <NavigationBar  v-bind="{playsSound,stopTime,course}" v-on="{'update:config':updateConfig}"/>
   <main class="flex flex-wrap h-full">
-    <div></div>
       <div class="h-5/6 lg:w-1/2  mx-auto">
         <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
-        <CameraArea @tookPhoto="saveImage" :latastImage="latastImage" />
+        <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime}" />
       </div>
   </main>
 
@@ -43,9 +42,14 @@ export default defineComponent({
 
 
     const updateConfig = (e)=> {
-      course.value = e.course
-      playsSound.value = e.playsSound
-      stopTime.value = e.stopTime
+      switch(e.changeName){
+        case "playsSound":
+          playsSound.value = e.value
+          break
+        case "stopTime":
+          stopTime.value = e.value
+          break
+      }
     }
 
 

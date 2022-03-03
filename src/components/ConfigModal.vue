@@ -1,6 +1,6 @@
 <template>
   <div>
-      <label for="viewPic" class="btn modal-button text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Photo(press Q to take one)</label>
+      <label for="viewPic" class="btn modal-button text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">CONFIG</label>
   <!--モーダルの中身-->
     <input type="checkbox" id="viewPic" class="modal-toggle">
     <div class="modal">
@@ -63,15 +63,16 @@ export default defineComponent({
       get: ()=> config.playsSound,
       set: (value) => {
         config.playsSound = value
-        context.emit("update:config",config)
+        context.emit("update:config",{changeName:"playsSound",value:value})
       }
     })
 
     const stopTimeComp = computed({
       get: ()=> config.stopTime,
       set: (value) => {
+        value = Number(value)
         config.stopTime = value
-        context.emit("update:config",config)
+        context.emit("update:config",{changeName:"stopTime",value:value})
       }
     })
 
@@ -79,7 +80,7 @@ export default defineComponent({
       get: ()=> config.course,
       set: (value) => {
         config.course = value
-        context.emit("update:config",config)
+        context.emit("update:config",{changeName:"course",value:value})
       }
     })
 
