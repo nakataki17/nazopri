@@ -16,6 +16,7 @@ import { defineComponent, ref } from '@vue/runtime-core'
 import CameraArea from './components/CameraArea.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
+import {placeHolder} from "./assets/noImage.json"
 
 export default defineComponent({
   name: 'App',
@@ -25,6 +26,7 @@ export default defineComponent({
     QuestionArea,
   },
   setup(){   
+    console.log(placeHolder)
     let qno = ref("1")
     //枚数
     let qcnt = ref({
@@ -33,8 +35,8 @@ export default defineComponent({
     //この辺はconfigでいじれるようになりたい
     let course = ref("Cute")
     let playsSound = ref(true)
-    let stopTime = ref(3000)
-    let latastImage = ref("")
+    let stopTime = ref(1500)
+    let latastImage = ref(placeHolder)
   
     const saveImage = (e) =>{
       latastImage.value = e 
@@ -49,6 +51,8 @@ export default defineComponent({
         case "stopTime":
           stopTime.value = e.value
           break
+        case "course":
+          course.value = e.value
       }
     }
 
