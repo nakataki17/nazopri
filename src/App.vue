@@ -1,7 +1,7 @@
 <template>
-  <NavigationBar  v-bind="{playsSound,stopTime,course}" v-on="{'update:config':updateConfig}"/>
+  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt}" v-on="{'update:config':updateConfig}"/>
   <main class="flex flex-wrap h-full">
-      <div class="h-5/6 lg:w-1/2  mx-auto">
+      <div class="h-5/6 lg:w-1/2  mx-auto ">
         <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
@@ -16,7 +16,7 @@ import { defineComponent, ref } from '@vue/runtime-core'
 import CameraArea from './components/CameraArea.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
-import {placeHolder} from "./assets/noImage.json"
+import {noImage} from "./assets/noImage.json"
 
 export default defineComponent({
   name: 'App',
@@ -26,17 +26,24 @@ export default defineComponent({
     QuestionArea,
   },
   setup(){   
-    console.log(placeHolder)
+    console.log(noImage)
     let qno = ref("1")
     //枚数
     let qcnt = ref({
+      "Cool":9,
+      "Crazy":9,
+      "Hard":10,
+      "Lovely":9,
+      "Standard":9,
       "Cute":12,
     })
-    //この辺はconfigでいじれるようになりたい
-    let course = ref("Cute")
+    //設定項目
+    let course = ref(Object.keys(qcnt.value)[0])
     let playsSound = ref(true)
     let stopTime = ref(1500)
-    let latastImage = ref(placeHolder)
+    let latastImage = ref(noImage)
+    let showHeader = ref("true")
+
   
     const saveImage = (e) =>{
       latastImage.value = e 
@@ -73,6 +80,11 @@ export default defineComponent({
           qno.value--
           if(qno.value<=0){qno.value=1}
           break
+        case "KeyH":
+          showHeader.value = !showHeader.value
+          if(!showHeader.value){alert("push h to show again")}
+          console.log("toggle navbar")
+          break
       }
     }
     document.addEventListener("keydown",keyboardPress)
@@ -86,7 +98,8 @@ export default defineComponent({
       latastImage,
       playsSound,
       stopTime,
-      updateConfig
+      updateConfig,
+      showHeader
     }
   }
 })

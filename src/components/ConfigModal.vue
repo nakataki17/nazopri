@@ -17,22 +17,17 @@
       <div class="flex justify-between">
         <span class="my-auto label-text">コース</span>
         <select class="select  max-w-xs" v-model="courseComp">
-          <option>Cute</option>
-          <option>Cool</option>
-          <option>Crazy</option>
-          <option>Hard</option>
-          <option>LUNATIC</option>
+          <option v-for="course in courseName" :key="course">{{course}}</option>
         </select>
       </div>
       <div class="flex justify-between mb-2">
       <span class="label-text">一時停止時間</span>
       <a>{{config.stopTime/1000}} sec</a>
-
       </div>
       <input type="range" v-model="stopTimeComp" min="0" max="5000" class="range" step="500">
-
+      <div>Hを押すとヘッダーの表示・非表示を切り替えられます</div>
         <div class="modal-action">
-          <label for="viewPic" class="btn">close</label>
+          <label for="configModal" class="btn">close</label>
         </div>
       </div>
     </div>
@@ -52,6 +47,7 @@ export default defineComponent({
     course :String,
     playsSound :Boolean,
     stopTime :Number,
+    qcnt: Object,
   },
 
   setup(props,context){
@@ -86,13 +82,13 @@ export default defineComponent({
       }
     })
 
-
-
+    const courseName = Object.keys(props.qcnt)
     return{
       config,
       soundComp,
       stopTimeComp,
       courseComp,
+      courseName
     }
   }
 })

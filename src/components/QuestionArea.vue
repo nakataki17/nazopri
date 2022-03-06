@@ -1,6 +1,6 @@
 <template>
     <div class="w-5/6 h-full mx-auto text-center">
-      <img class=" text-center  mx-auto"  v-bind:src="imgSrc(course,qno)" alt="">
+      <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc(course,qno)" alt="">
     </div>
 </template>
 
@@ -13,12 +13,12 @@ export default defineComponent({
     course: String,
     qno: String,
     qcnt: Object,
-    keyboardPress: Function,
   },
 
   setup(props) {
     onMounted(() => {
-      document.addEventListener("keydown",props.keyboardPress)
+//        document.addEventListener("keydown",props.keyboardPress)
+      console.log("mounted qArea")
     })
 
     const imgSrc = ()=>{
