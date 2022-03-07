@@ -7,8 +7,9 @@
         <div class="modal">
           <div class="modal-box">
             <img class="" v-bind:src="'data:'+latastImage" >
-            <div class="modal-action">
+            <div class="flex justify-between modal-action">
               <label for="viewPic" class="btn">close</label>
+            <button class="btn" v-on:click="sharePic">SHARE</button>
             </div>
           </div>
         </div>
@@ -39,9 +40,7 @@ export default defineComponent({
       if(code == "KeyQ"){
         canvas.value.width = Math.max(200, video.value.videoWidth)
         canvas.value.height = Math.max(200, video.value.videoHeight)
-        console.log(video.value.videoWidth+"width")
-        console.log("Pasha!")
-        console.log(props)
+        console.log(video.value.videoWidth+"=width")
         video.value.pause();  
         setTimeout( () => {
           video.value.play(); 
@@ -88,6 +87,34 @@ export default defineComponent({
       }
     });
 
+    const sharePic = (()=>{
+      const toBlob = (base64) => {
+        const decodedData = atob(base64.replace(/^.*,/, ""));
+        const buffers = new Uint8Array(decodedData.length);
+        for (let i = 0; i < decodedData.length; i++) {
+          buffers[i] = decodedData.charCodeAt(i);
+        }
+        try {
+          const blob = new Blob([buffers.buffer], {
+            type: "image/png",
+          });
+          return blob;
+        } catch (e) {
+          return null;
+        }
+      };
+    const blob = toBlob(props.latastImage)
+    const file = new File([blob],"image.png",{type:"image/png"})
+    console.log("shared image")
+    navigator.share({
+      title:"NAZO♡PRI",
+      text:"let's share this image!",
+      files:[file]
+    })
+
+    })
+
+
 
 
     return {
@@ -95,6 +122,7 @@ export default defineComponent({
       audio,
       canvas,
       showPhoto,
+      sharePic,
     };
 
 

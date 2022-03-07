@@ -26,7 +26,6 @@ export default defineComponent({
     QuestionArea,
   },
   setup(){   
-    console.log(noImage)
     let qno = ref("1")
     //枚数
     let qcnt = ref({
@@ -42,7 +41,7 @@ export default defineComponent({
     let playsSound = ref(true)
     let stopTime = ref(1500)
     let latastImage = ref(noImage)
-    let showHeader = ref("true")
+    let showHeader = ref(true)
 
   
     const saveImage = (e) =>{
