@@ -71,7 +71,7 @@ export default defineComponent({
         case "KeyW":
           console.log("Q+")
           qno.value++
-          if(qno.value>=qcnt.value[course.value]){
+          if(qno.value>qcnt.value[course.value]){
             qno.value-- 
           }
           break
