@@ -1,6 +1,6 @@
 <template>
     <div class="w-full camera m-auto text-center ">
-      <video ref="video" id="camera" class="lg:w-3/5 h-full text-center mx-auto object-fill" playsinline autoplay></video>
+      <video ref="video" id="camera" class="lg:w-3/5 text-center mx-auto object-fill" playsinline autoplay></video>
       <label for="viewPic" class="btn modal-button text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Photo(press Q to take one)</label>
       <!--モーダルの中身-->
         <input type="checkbox" id="viewPic" class="modal-toggle">
@@ -74,8 +74,8 @@ export default defineComponent({
         navigator.mediaDevices.getUserMedia({
           video:{
         facingMode: facing,
-        width:{min:480,ideal:1080},
-        height:{min:720,ideal:1620},
+        width:{min:480,ideal:480},
+        height:{min:480,ideal:720},
         aspectRatio:2/3
       },
           audio: false,
