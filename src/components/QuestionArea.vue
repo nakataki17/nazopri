@@ -11,7 +11,7 @@ export default defineComponent({
   name: "QuestionArea",
   props:{
     course: String,
-    qno: String,
+    qno: Number,
     qcnt: Object,
   },
 

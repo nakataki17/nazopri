@@ -28,34 +28,54 @@ export default defineComponent({
     stopTime : Number,
     playsSound : Boolean,
     latastImage : String,
-    cameraHeight: Number,
-    cameraWidth: Number,
+    cameraHeight: String,
+    cameraWidth: String,
   },
   emits:["tookPhoto",],
   setup(props,context) {
     const video = ref()
     const canvas = ref()
-    const audio = new Audio(require("@/assets/shutter.mp3"))
+    const shutter = new Audio(require("@/assets/shutter.mp3"))
+    const correctShutter = new Audio(require("@/assets/Sound/カシャピンポン.mp3"))
+    const wrongShutter = new Audio(require("@/assets/Sound/カシャブー.mp3"))
+
     console.log(props)
     const takePhoto = ((e) =>{
       const code = e.code
-      if(code == "KeyQ"){
+      console.log(code)
+      if(code == "KeyQ" || code=="KeyO" || code=="KeyX" ){
+        //canvasの準備
         canvas.value.width = Math.max(200, video.value.videoWidth)
         canvas.value.height = Math.max(200, video.value.videoHeight)
-        console.log(video.value.videoWidth+"=width")
+
+        //一時停止とその再開
         video.value.pause();  
         setTimeout( () => {
           video.value.play(); 
         }, props.stopTime);//{stoptime=2000} msの停止
-        if(props.playsSound){
-          //シャッターの再生
-          //貨車ピンポン、貨車ブーは未実装
-          audio.play()
-        }
 
         canvas.value.getContext("2d").drawImage(video.value,0,0,)
         let photo = canvas.value.toDataURL("image/png")
         context.emit("tookPhoto",photo)
+        //シャッター,正誤判定
+        if(props.playsSound){
+          //シャッターの再生
+          //貨車ピンポン、貨車ブーは未実装
+          switch (code){
+            case "KeyQ":
+              shutter.play()
+              console.log("Pasha!")
+              break
+            case "KeyO":
+              correctShutter.play()
+              console.log("Correct!")
+              break
+            case "KeyX":
+              wrongShutter.play()
+              console.log("Wrong...!")
+              break
+          }
+        }
 
 
 
@@ -120,11 +140,10 @@ export default defineComponent({
 
 
     return {
-      video,
-      audio,
       canvas,
       showPhoto,
       sharePic,
+      video,
     };
 
 
