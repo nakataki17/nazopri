@@ -1,5 +1,6 @@
 <template>
-  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig}"/>
+  <ResultCard ref="modalRef" v-bind="{pictureResult:pictureResult}"></ResultCard>
+  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-wrap h-full">
       <div class="h-5/6 lg:w-1/2  mx-auto ">
         <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
@@ -16,7 +17,8 @@ import { defineComponent, ref } from '@vue/runtime-core'
 import CameraArea from './components/CameraArea.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
-import {noImage} from "./assets/noImage.json"
+import {placeHolder} from "./assets/noImage.json"
+import ResultCard from './components/ResultCard.vue'
 
 export default defineComponent({
   name: 'App',
@@ -24,7 +26,9 @@ export default defineComponent({
     CameraArea,
     NavigationBar,
     QuestionArea,
+    ResultCard
   },
+  emits:[],
   setup(){   
     //写真と正誤判定の保存
     const pictureResult  = ref([])
@@ -56,7 +60,7 @@ export default defineComponent({
     let course = ref(Object.keys(qcnt.value)[0])
     let playsSound = ref(true)
     let stopTime = ref(1500)
-    let latastImage = ref(noImage)
+    let latastImage = ref(placeHolder)
     let showHeader = ref(true)
 
   
@@ -103,6 +107,18 @@ export default defineComponent({
           break
       }
     }
+
+    //モーダルらへん
+    const modalId = ref(0)
+    const modalResult = ref()
+    const modalImage = ref()
+    const modalRef = ref()
+    const openModal = (e) => {
+      modalRef.value.openModal(e)
+    }
+
+
+
     document.addEventListener("keydown",keyboardPress)
 
     return{
@@ -119,6 +135,11 @@ export default defineComponent({
       cameraHeight,
       cameraWidth,
       pictureResult,
+      openModal,
+      modalId,
+      modalResult,
+      modalImage,
+      modalRef
     }
   }
 })
