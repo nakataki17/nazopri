@@ -56,26 +56,33 @@ export default defineComponent({
 
         canvas.value.getContext("2d").drawImage(video.value,0,0,)
         let photo = canvas.value.toDataURL("image/png")
-        context.emit("tookPhoto",photo)
+        let result;
+
         //シャッター,正誤判定
-        if(props.playsSound){
-          //シャッターの再生
-          //貨車ピンポン、貨車ブーは未実装
-          switch (code){
-            case "KeyQ":
-              shutter.play()
-              console.log("Pasha!")
-              break
-            case "KeyO":
-              correctShutter.play()
-              console.log("Correct!")
-              break
-            case "KeyX":
-              wrongShutter.play()
-              console.log("Wrong...!")
-              break
-          }
+ 
+        switch (code){
+          case "KeyQ":
+            if(props.playsSound){
+            shutter.play()
+            }
+            console.log("Pasha!")
+            break
+          case "KeyO":
+            result = "Correct"
+            if(props.playsSound){
+            correctShutter.play()
+            }
+            console.log("Correct!")
+            break
+          case "KeyX":
+            result = "Wrong"
+            if(props.playsSound){
+            wrongShutter.play()
+            }
+            console.log("Wrong...!")
+            break
         }
+        context.emit("tookPhoto",{"picture":photo,"result":result})
 
 
 

@@ -7,6 +7,7 @@
     </a>
   </div>
   <div class="navbar-end">
+    <ResultModal v-bind="{pictureResult}" />
     <ConfigModal v-bind="{playsSound,stopTime,course,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   </div>
 
@@ -17,12 +18,14 @@
 <script>
 import { defineComponent, reactive, } from "vue";
 import ConfigModal from './ConfigModal.vue'
+import ResultModal from './ResultModal.vue'
 
 export default defineComponent({
   name: "NavigationBar",
   components:{
     ConfigModal,
-  },
+    ResultModal
+},
   props:{
     course :String,
     playsSound :Boolean,
@@ -31,6 +34,7 @@ export default defineComponent({
     qcnt: Object,
     cameraHeight: Number,
     cameraWidth: Number,
+    pictureResult:Array,
   },
   emits:["update:config"],
   setup(props,context) {

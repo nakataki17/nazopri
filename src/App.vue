@@ -1,5 +1,5 @@
 <template>
-  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"/>
+  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig}"/>
   <main class="flex flex-wrap h-full">
       <div class="h-5/6 lg:w-1/2  mx-auto ">
         <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
@@ -26,6 +26,8 @@ export default defineComponent({
     QuestionArea,
   },
   setup(){   
+    //写真と正誤判定の保存
+    const pictureResult  = ref([])
     //ローカルストレージからカメラ縦横の読み込み
     const cameraWidth = ref()
     const cameraHeight = ref()
@@ -59,7 +61,8 @@ export default defineComponent({
 
   
     const saveImage = (e) =>{
-      latastImage.value = e 
+      latastImage.value = e.picture
+      pictureResult.value.push(e)
     }
 
 
@@ -115,6 +118,7 @@ export default defineComponent({
       showHeader,
       cameraHeight,
       cameraWidth,
+      pictureResult,
     }
   }
 })
