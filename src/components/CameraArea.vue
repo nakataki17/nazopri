@@ -39,7 +39,6 @@ export default defineComponent({
     const correctShutter = new Audio(require("@/assets/Sound/カシャピンポン.mp3"))
     const wrongShutter = new Audio(require("@/assets/Sound/カシャブー.mp3"))
 
-    console.log(props)
     const takePhoto = ((e) =>{
       const code = e.code
       console.log(code)

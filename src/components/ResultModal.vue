@@ -48,11 +48,6 @@ export default defineComponent({
       judge.value = goodResult.value[e].result
     }
 
-    if(props.pictureResult[0]){
-    console.log(props.pictureResult[0].resultModal)
-    }else{
-      console.log(props.pictureResult)
-    }
     return{
       goodResult,
       judge,

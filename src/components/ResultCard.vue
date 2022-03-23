@@ -1,5 +1,5 @@
 <template><!-- This example requires Tailwind CSS v2.0+ -->
-<div class="ease-in card lg:card-side bg-base-100 w-5/6 xl:w-1/2 shadow-xl z-[10000] fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2" :class="{hidden:isOpen===false}">
+<div class="ease-in card lg:card-side bg-base-100 w-5/6 xl:w-1/2 shadow-xl z-[10000] fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2" :class="{invisible:isOpen===false}">
   <figure><img :src="'data:'+modalObj.picture" alt="RESULT"></figure>
   <div class="card-body">
     <h2 class="card-title">{{modalObj.id+1}}枚め</h2>
@@ -44,7 +44,7 @@ export default defineComponent({
     }
 
 
-
+    console.log("isopen="+isOpen.value)
     return{
       isOpen,
       setModalStat,
