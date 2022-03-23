@@ -7,7 +7,7 @@
     </a>
   </div>
   <div class="navbar-end">
-    <ConfigModal v-bind="{playsSound,stopTime,course,qcnt}" v-on="{'update:config':updateConfig}"></ConfigModal>
+    <ConfigModal v-bind="{playsSound,stopTime,course,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   </div>
 
 </div>
@@ -29,6 +29,8 @@ export default defineComponent({
     stopTime :Number,
     showHeader : Boolean,
     qcnt: Object,
+    cameraHeight: Number,
+    cameraWidth: Number,
   },
   emits:["update:config"],
   setup(props,context) {

@@ -1,11 +1,11 @@
 <template>
-  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt}" v-on="{'update:config':updateConfig}"/>
+  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"/>
   <main class="flex flex-wrap h-full">
       <div class="h-5/6 lg:w-1/2  mx-auto ">
         <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
-        <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime}" />
+        <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
       </div>
   </main>
 
@@ -26,6 +26,20 @@ export default defineComponent({
     QuestionArea,
   },
   setup(){   
+    //ローカルストレージからカメラ縦横の読み込み
+    const cameraWidth = ref()
+    const cameraHeight = ref()
+    if(localStorage.cameraWidth){
+      cameraWidth.value = localStorage.cameraWidth
+    }else{
+      cameraWidth.value = 480
+    }
+    if(localStorage.cameraHeight){
+      cameraHeight.value = localStorage.cameraHeight
+    }else{
+      cameraHeight.value = 720
+    }
+
     let qno = ref("1")
     //枚数
     let qcnt = ref({
@@ -98,7 +112,9 @@ export default defineComponent({
       playsSound,
       stopTime,
       updateConfig,
-      showHeader
+      showHeader,
+      cameraHeight,
+      cameraWidth,
     }
   }
 })

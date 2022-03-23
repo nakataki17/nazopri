@@ -26,6 +26,19 @@
       </div>
       <input type="range" v-model="stopTimeComp" min="0" max="5000" class="range" step="500">
       <div>Hを押すとヘッダーの表示・非表示を切り替えられます</div>
+
+      <div class="flex justify-between mb-2">
+      <span class="label-text">Camera Width(reload to change,default = 480px)</span>
+      <a>{{curCameraWidth}} px</a>
+      </div>
+      <input type="range" v-model="cameraWidthChange" min="480" max="1200" class="range" step="20" >
+    
+      <div class="flex justify-between mb-2">
+      <span class="label-text">Camera Height(reload to change,default= 720px)</span>
+      <a>{{curCameraHeight}} px</a>
+      </div>
+      <input type="range" v-model="cameraHeightChange" min="480" max="1200" class="range" step="20">
+      <button class="btn btn-warning" v-on:click="setCameraDefault">カメラの縦横比をリセット</button>
         <div class="modal-action">
           <label for="configModal" class="btn">close</label>
         </div>
@@ -36,7 +49,7 @@
 </template>
 
 <script>
-import { defineComponent, computed,reactive } from '@vue/runtime-core'
+import { defineComponent, computed,reactive ,ref} from '@vue/runtime-core'
 
 export default defineComponent({
   name: 'ConfigModal',
@@ -48,10 +61,13 @@ export default defineComponent({
     playsSound :Boolean,
     stopTime :Number,
     qcnt: Object,
+    cameraHeight: Number,
+    cameraWidth: Number,
   },
 
   setup(props,context){
-    console.log(props)
+    const curCameraHeight = ref(props.cameraHeight)
+    const curCameraWidth = ref(props.cameraWidth)
     const config = reactive({
       course: props.course,
       playsSound: props.playsSound,
@@ -82,13 +98,43 @@ export default defineComponent({
       }
     })
 
+    const cameraWidthChange = computed({
+      get: ()=> curCameraWidth.value,
+      set: (value) => {
+        value = Number(value)
+        curCameraWidth.value = value
+        localStorage.cameraWidth = value
+      }
+    })
+
+    const cameraHeightChange = computed({
+      get: ()=> curCameraHeight.value,
+      set: (value) => {
+        value = Number(value)
+        curCameraHeight.value = value
+        localStorage.cameraHeight = value
+      }
+    })
+
+    const setCameraDefault = (()=>{
+      localStorage.cameraWidth = 480
+      localStorage.cameraHeight = 720
+      window.location.reload()
+    })
+
+
     const courseName = Object.keys(props.qcnt)
     return{
       config,
       soundComp,
       stopTimeComp,
       courseComp,
-      courseName
+      courseName,
+      cameraWidthChange,
+      cameraHeightChange,
+      curCameraWidth,
+      curCameraHeight,
+      setCameraDefault
     }
   }
 })

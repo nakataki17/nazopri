@@ -28,6 +28,8 @@ export default defineComponent({
     stopTime : Number,
     playsSound : Boolean,
     latastImage : String,
+    cameraHeight: Number,
+    cameraWidth: Number,
   },
   emits:["tookPhoto",],
   setup(props,context) {
@@ -73,8 +75,8 @@ export default defineComponent({
         navigator.mediaDevices.getUserMedia({
           video:{
         facingMode: facing,
-        width:{min:480,ideal:480},
-        height:{min:480,ideal:720},
+        width:{min:480,ideal:props.cameraWidth},
+        height:{min:480,ideal:props.cameraHeight},
         aspectRatio:2/3
       },
           audio: false,
