@@ -3,7 +3,7 @@
   <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-wrap h-full">
       <div class="h-5/6 lg:w-1/2  mx-auto ">
-        <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
+        <QuestionArea  :course="course" :imageInd="imageInd" :qcnt="qcnt" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
         <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
@@ -46,15 +46,15 @@ export default defineComponent({
       cameraHeight.value = 720
     }
 
-    let qno = ref("1")
+    let imageInd = ref("1")
     //枚数
     let qcnt = ref({
-      "Cool":9,
-      "Crazy":9,
-      "Hard":10,
-      "Lovely":9,
-      "Standard":9,
-      "Cute":12,
+      "クール":8,
+      "クレイジー":8,
+      "ハード":8,
+      "ラブリー":8,
+      "スタンダード":8,
+      "キュート":8,
     })
     //設定項目
     let course = ref(Object.keys(qcnt.value)[0])
@@ -90,15 +90,15 @@ export default defineComponent({
       switch (code){
         case "KeyW":
           console.log("Q+")
-          qno.value++
-          if(qno.value>qcnt.value[course.value]){
-            qno.value-- 
+          imageInd.value++
+          if(imageInd.value>qcnt.value[course.value]){
+            imageInd.value-- 
           }
           break
         case "KeyS":
           console.log("Q-")
-          qno.value--
-          if(qno.value<=0){qno.value=1}
+          imageInd.value--
+          if(imageInd.value<=0){imageInd.value=1}
           break
         case "KeyH":
           showHeader.value = !showHeader.value
@@ -124,7 +124,7 @@ export default defineComponent({
     return{
       keyboardPress,
       course,
-      qno,
+      imageInd,
       qcnt,
       saveImage,
       latastImage,

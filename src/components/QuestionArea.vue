@@ -1,6 +1,6 @@
 <template>
     <div class="w-5/6 h-full mx-auto text-center">
-      <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc(course,qno)" alt="">
+      <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc(course,imageInd)" alt="">
     </div>
     <span class=" countdown font-mono text-6xl flex justify-center" v-if="time>=-1">
       <span v-bind:style="'--value:'+time+';'" v-bind:class="{'text-red-500':time<=5}" ></span>
@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref} from "vue";
+import { defineComponent, onMounted, ref,watchEffect} from "vue";
+import QList from "../assets/QList.json"
 
 export default defineComponent({
   name: "QuestionArea",
   props:{
     course: String,
-    qno: Number,
-    qcnt: Object,
+    imageInd: Number,
   },
 
   setup(props) {
@@ -30,11 +30,12 @@ export default defineComponent({
     })
 
     const imgSrc = ()=>{
-      console.log("@/assets/"+props.course+"/"+props.qno+".png")
-      return require("@/assets/"+props.course+"/"+props.qno+".png")
+      console.log("@/assets/"+props.course+"/"+props.imageInd+".png")
+      return require("@/assets/"+props.course+"/"+props.imageInd+".png")
     }
 
     const startTimer = (length) => {
+      clearInterval(timerID.value)
       time.value = length
       timerID.value = setInterval(()=>{
         if(time.value > -1 ){
@@ -46,9 +47,16 @@ export default defineComponent({
       },1000)
     }
 
+    watchEffect(()=>{
+      //eslint-disable-next-line
+      let qcourse = props.course
+      let times = QList[qcourse].timeLimit
+      startTimer(times[props.imageInd])
+      console.log("制限時間は"+times[props.imageInd]+" sec")
+  
+    })
 
 
-    startTimer(20)
 
     return{
       timerID,
