@@ -144,14 +144,14 @@ export default defineComponent({
       //ヘッダーなどの設定
       const config = {
           headers: {
-              'Accept': 'application/json',
-              'Content-type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
           }
       }
 
       //送信するデータ
       const postData = {
-        "value1":value.value
+        value1:value.value,
+        value2:"this is value 2"
       }
 
       const main = async () => {
