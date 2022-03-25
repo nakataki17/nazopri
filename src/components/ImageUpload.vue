@@ -144,7 +144,6 @@ export default defineComponent({
       //ヘッダーなどの設定
       const config = {
           headers: {
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/x-www-form-urlencoded'
           }
       }
