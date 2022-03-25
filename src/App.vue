@@ -3,7 +3,7 @@
   <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-wrap h-full">
       <div class="h-5/6 lg:w-1/2  mx-auto ">
-        <QuestionArea  :course="course" :imageInd="imageInd" :qcnt="qcnt" :keyboardPress="keyboardPress" />
+        <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
         <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
@@ -19,6 +19,7 @@ import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
 import {placeHolder} from "./assets/noImage.json"
 import ResultCard from './components/ResultCard.vue'
+
 
 export default defineComponent({
   name: 'App',
@@ -66,8 +67,11 @@ export default defineComponent({
   
     const saveImage = (e) =>{
       latastImage.value = e.picture
+      localStorage.latastImage = latastImage.value
       pictureResult.value.push(e)
+      console.log(localStorage.latastImage)
     }
+
 
 
     const updateConfig = (e)=> {
@@ -139,7 +143,7 @@ export default defineComponent({
       modalId,
       modalResult,
       modalImage,
-      modalRef
+      modalRef,
     }
   }
 })

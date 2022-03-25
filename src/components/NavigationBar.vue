@@ -8,7 +8,7 @@
   </div>
   <div class="navbar-end">
     <ResultModal v-bind="{pictureResult}" @openModal="emitOpenModal" />
-
+    <ImageUpload></ImageUpload>
     <ConfigModal v-bind="{playsSound,stopTime,course,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   </div>
 
@@ -20,12 +20,14 @@
 import { defineComponent, reactive, } from "vue";
 import ConfigModal from './ConfigModal.vue'
 import ResultModal from "./ResultModal.vue";
+import ImageUpload from "./ImageUpload.vue";
 
 export default defineComponent({
   name: "NavigationBar",
   components:{
     ConfigModal,
     ResultModal,
+    ImageUpload,
 },
   props:{
     course :String,

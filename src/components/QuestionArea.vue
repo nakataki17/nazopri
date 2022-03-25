@@ -17,6 +17,7 @@ export default defineComponent({
   props:{
     course: String,
     imageInd: Number,
+    keyboardPress: Function
   },
 
   setup(props) {
@@ -30,7 +31,6 @@ export default defineComponent({
     })
 
     const imgSrc = ()=>{
-      console.log("@/assets/"+props.course+"/"+props.imageInd+".png")
       return require("@/assets/"+props.course+"/"+props.imageInd+".png")
     }
 
