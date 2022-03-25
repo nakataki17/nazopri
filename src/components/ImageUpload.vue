@@ -145,17 +145,18 @@ export default defineComponent({
       const config = {
           headers: {
             'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
       }
 
       //送信するデータ
-      const postData = {
-        value1:value.value,
-        value2:"this is value 2"
-      }
+
+      var params = new URLSearchParams();
+      params.append('value1', value.value);
+      params.append('value2', 'test');
 
       const main = async () => {
-          const res = await axios.post(URL, postData, config)
+          const res = await axios.post(URL, params, config)
           console.log(res)
           console.log(value.value)
       }
