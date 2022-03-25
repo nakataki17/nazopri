@@ -1,7 +1,7 @@
 <template>
   <ResultCard ref="modalRef" v-bind="{pictureResult:pictureResult}"></ResultCard>
   <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
-  <main class="flex flex-wrap h-full">
+  <main class="flex flex-wrap h-full  items-center" >
       <div class="h-5/6 lg:w-1/2  mx-auto ">
         <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
       </div>
@@ -27,7 +27,7 @@ export default defineComponent({
     CameraArea,
     NavigationBar,
     QuestionArea,
-    ResultCard
+    ResultCard,
   },
   emits:[],
   setup(){   
@@ -39,15 +39,17 @@ export default defineComponent({
     if(localStorage.cameraWidth){
       cameraWidth.value = localStorage.cameraWidth
     }else{
+      localStorage.cameraWidth = 480
       cameraWidth.value = 480
     }
     if(localStorage.cameraHeight){
       cameraHeight.value = localStorage.cameraHeight
     }else{
+      localStorage.cameraHeight = 720
       cameraHeight.value = 720
     }
 
-    let imageInd = ref("1")
+    let imageInd = ref("-1")
     //枚数
     let qcnt = ref({
       "クール":8,
@@ -58,7 +60,10 @@ export default defineComponent({
       "キュート":8,
     })
     //設定項目
-    let course = ref(Object.keys(qcnt.value)[0])
+    if(!localStorage.course){
+      localStorage.course = "クール"
+    }
+    let course = ref(localStorage.course)
     let playsSound = ref(true)
     let stopTime = ref(1500)
     let latastImage = ref(placeHolder)
@@ -69,7 +74,6 @@ export default defineComponent({
       latastImage.value = e.picture
       localStorage.latastImage = latastImage.value
       pictureResult.value.push(e)
-      console.log(localStorage.latastImage)
     }
 
 
@@ -95,14 +99,14 @@ export default defineComponent({
         case "KeyW":
           console.log("Q+")
           imageInd.value++
-          if(imageInd.value>qcnt.value[course.value]){
+          if(imageInd.value>10){
             imageInd.value-- 
           }
           break
         case "KeyS":
           console.log("Q-")
           imageInd.value--
-          if(imageInd.value<=0){imageInd.value=1}
+          if(imageInd.value<=-2){imageInd.value=-1}
           break
         case "KeyH":
           showHeader.value = !showHeader.value

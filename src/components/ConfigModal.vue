@@ -95,6 +95,7 @@ export default defineComponent({
       set: (value) => {
         config.course = value
         context.emit("update:config",{changeName:"course",value:value})
+        localStorage.course = value
       }
     })
 
