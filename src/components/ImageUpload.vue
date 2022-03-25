@@ -139,7 +139,7 @@ export default defineComponent({
     const sendWebhook = ()=>{
             
       const axios = require('axios')
-      const URL = `DiscordのWebhook URL`
+      const URL = "https://maker.ifttt.com/trigger/url/with/key/o-pQlih5WJrM6hMDIX7YEZ1FZ7GBJxmbQq8N659bQTJ"
 
       //ヘッダーなどの設定
       const config = {
@@ -151,15 +151,15 @@ export default defineComponent({
 
       //送信するデータ
       const postData = {
-          username: 'fusma@nazopri',
-          content: 'Node.jsからポストしてるよ :)'
+        "value1":value.value
       }
 
       const main = async () => {
           const res = await axios.post(URL, postData, config)
           console.log(res)
+          console.log(value.value)
       }
-      console.log(main)
+      main()
     }
      
     return{
