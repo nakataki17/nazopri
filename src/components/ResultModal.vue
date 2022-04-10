@@ -2,7 +2,7 @@
 
 <label for="resultModal" class="btn modal-button">Show Result</label>
 <!-- Modalの中身 -->
-<input type="checkbox" id="resultModal" class="modal-toggle">
+<input type="checkbox" id="resultModal" class="modal-toggle" v-model="isOpen">
 <div class="modal">
    <div class="modal-box w-11/12 max-h-screen max-w-none ">
       <div class="grid grid-cols-2 xl:grid-cols-3 gap-4 lg:w-1/2 lg:mx-auto">
@@ -48,10 +48,20 @@ export default defineComponent({
       judge.value = goodResult.value[e].result
     }
 
+    
+    const isOpen = ref(false)
+
+    const setModalStat =b=>{
+      isOpen.value=b
+    }
+
+
     return{
       goodResult,
       judge,
-      getPicNum
+      getPicNum,
+      isOpen,
+      setModalStat      
     }
   },
 })

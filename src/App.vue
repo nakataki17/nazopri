@@ -113,6 +113,9 @@ export default defineComponent({
           if(!showHeader.value){alert("push h to show again")}
           console.log("toggle navbar")
           break
+        case "keyR":
+          console.log("Open result")
+          break
       }
     }
 
