@@ -55,13 +55,24 @@ export default defineComponent({
       isOpen.value=b
     }
 
+    
+    const keyboardPress = (e) => { 
+      const code = e.code
+      switch (code){
+        case "KeyR":
+          setModalStat(!isOpen.value)
+      }
+    }
+
+    document.addEventListener("keydown",keyboardPress)
 
     return{
       goodResult,
       judge,
       getPicNum,
       isOpen,
-      setModalStat      
+      setModalStat,
+      keyboardPress     
     }
   },
 })
