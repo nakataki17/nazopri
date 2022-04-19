@@ -48,7 +48,7 @@ export default defineComponent({
       cameraHeight.value = 720
     }
 
-    let imageInd = ref("-1")
+    let imageInd = ref("1")
     //設定項目
     if(!localStorage.course){
       localStorage.course = "クール"
@@ -89,14 +89,12 @@ export default defineComponent({
         case "KeyW":
           console.log("Q+")
           imageInd.value++
-          if(imageInd.value>10){
-            imageInd.value-- 
-          }
+          if(imageInd.value>12){imageInd.value = 12}
           break
         case "KeyS":
           console.log("Q-")
           imageInd.value--
-          if(imageInd.value<=-2){imageInd.value=-1}
+          if(imageInd.value<0){imageInd.value=0}
           break
         case "KeyH":
           showHeader.value = !showHeader.value

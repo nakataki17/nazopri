@@ -11,7 +11,7 @@
         </div> 
       </div>
     <div class="modal-action">
-      <label for="resultModal" class="btn">Yay!</label>
+      <label for="resultModal" class="btn">Close!</label>
     </div>
   </div>
 

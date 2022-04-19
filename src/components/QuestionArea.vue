@@ -1,19 +1,18 @@
 <template>
     <div class="w-5/6 h-full mx-auto text-center">
-      <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc(course,imageInd)" alt="">
+      <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc" alt="">
     </div>
     <div>
       <span class="countdown font-mono text-9xl flex justify-center scale-150 mt-9" v-if="time>=-1">
-        <span v-bind:style="'--value:'+time+';'" v-bind:class="{'text-red-500':time<=5, 'text-white':imageInd<=0 || imageInd>=9}" ></span>
+        <span v-bind:style="'--value:'+time+';'" v-bind:class="{'text-red-500':time<=5, 'text-white':imageInd>12}" ></span>
       </span>
-      <span class="text-red-500 font-title text-3xl flex justify-center" v-else>Time's up!</span>      
+      <span class="text-red-500 font-title text-7xl flex justify-center" v-else>Time's up!</span>      
     </div>
 
 </template>
 
 <script>
-import { defineComponent, onMounted, ref,watchEffect} from "vue";
-import QList from "../assets/QList.json"
+import { defineComponent, onMounted, ref, watchEffect} from "vue";
 import questionData from "../assets/questionData/questions.json";
 
 export default defineComponent({
@@ -34,13 +33,8 @@ export default defineComponent({
       console.log("mounted qArea")
     })
 
-    const imgSrc = ()=>{
-      if(1<=props.imageInd && props.imageInd<=8){
-        return require("@/assets/"+props.course+"/"+props.imageInd+".png")
-      }else if(-1<=props.imageInd && props.imageInd<=10){
-        return require("@/assets/説明/"+props.imageInd+".png")
-      }
-    }
+    //画像ソース
+    const imgSrc = ref(require("@/assets/Images/説明_1.png") )
 
     const startTimer = (length) => {
       clearInterval(timerID.value)
@@ -56,21 +50,21 @@ export default defineComponent({
     }
 
     const changeImage = ()=>{
-      
+      const questionInfo = questionData[props.course]
+      const {"制限時間":timeLimit, "ファイル名":fileName} = questionInfo[props.imageInd]
+      imgSrc.value = require("@/assets/Images/"+fileName)
+      if(timeLimit==-1){
+        startTimer(100)//ダミー処理
+      }else{
+        startTimer(timeLimit)
+      }
     }
 
+
     watchEffect(()=>{
+      console.log(props.imageInd)
       //画像indの変更を監視して走るイベント
-      //eslint-disable-next-line
-      let qcourse = props.course
-      let times = QList[qcourse].timeLimit
-      if(1<=props.imageInd && props.imageInd<=8){
-      startTimer(times[props.imageInd])
-      console.log("制限時間は"+times[props.imageInd]+" sec")
-      }else{
-        startTimer(100)
-      }
-  
+      changeImage()
     })
 
 
