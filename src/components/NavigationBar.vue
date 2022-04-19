@@ -9,7 +9,7 @@
   <div class="navbar-end">
     <ResultModal v-bind="{pictureResult}" @openModal="emitOpenModal" />
     <ImageUpload></ImageUpload>
-    <ConfigModal v-bind="{playsSound,stopTime,course,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
+    <ConfigModal v-bind="{playsSound,stopTime,course,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   </div>
 
 </div>
@@ -34,7 +34,6 @@ export default defineComponent({
     playsSound :Boolean,
     stopTime :Number,
     showHeader : Boolean,
-    qcnt: Object,
     cameraHeight: Number,
     cameraWidth: Number,
     pictureResult:Array,

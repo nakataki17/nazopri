@@ -14,6 +14,7 @@
 <script>
 import { defineComponent, onMounted, ref,watchEffect} from "vue";
 import QList from "../assets/QList.json"
+import questionData from "../assets/questionData/questions.json";
 
 export default defineComponent({
   name: "QuestionArea",
@@ -54,7 +55,12 @@ export default defineComponent({
       },1000)
     }
 
+    const changeImage = ()=>{
+      
+    }
+
     watchEffect(()=>{
+      //画像indの変更を監視して走るイベント
       //eslint-disable-next-line
       let qcourse = props.course
       let times = QList[qcourse].timeLimit

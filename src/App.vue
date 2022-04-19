@@ -1,6 +1,6 @@
 <template>
   <ResultCard ref="modalRef" v-bind="{pictureResult:pictureResult}"></ResultCard>
-  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
+  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-wrap h-full  items-center" >
       <div class="h-5/6 lg:w-1/2  mx-auto ">
         <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
@@ -19,7 +19,6 @@ import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
 import {placeHolder} from "./assets/noImage.json"
 import ResultCard from './components/ResultCard.vue'
-
 
 export default defineComponent({
   name: 'App',
@@ -50,15 +49,6 @@ export default defineComponent({
     }
 
     let imageInd = ref("-1")
-    //枚数
-    let qcnt = ref({
-      "クール":8,
-      "クレイジー":8,
-      "ハード":8,
-      "ラブリー":8,
-      "スタンダード":8,
-      "キュート":8,
-    })
     //設定項目
     if(!localStorage.course){
       localStorage.course = "クール"
@@ -125,15 +115,13 @@ export default defineComponent({
       modalRef.value.openModal(e)
     }
 
-
-
     document.addEventListener("keydown",keyboardPress)
+
 
     return{
       keyboardPress,
       course,
       imageInd,
-      qcnt,
       saveImage,
       latastImage,
       playsSound,
