@@ -38,8 +38,8 @@ export default defineComponent({
     if(localStorage.cameraWidth){
       cameraWidth.value = localStorage.cameraWidth
     }else{
-      localStorage.cameraWidth = 480
-      cameraWidth.value = 480
+      localStorage.cameraWidth = 720
+      cameraWidth.value = 720
     }
     if(localStorage.cameraHeight){
       cameraHeight.value = localStorage.cameraHeight
@@ -51,7 +51,7 @@ export default defineComponent({
     let imageInd = ref("1")
     //設定項目
     if(!localStorage.course){
-      localStorage.course = "クール"
+      localStorage.course = "Cool"
     }
     let course = ref(localStorage.course)
     let playsSound = ref(true)
@@ -87,27 +87,24 @@ export default defineComponent({
       const code = e.code
       switch (code){
         case "KeyW":
-          console.log("Q+")
+          console.log("次の画像へ")
           imageInd.value++
           if(imageInd.value>12){imageInd.value = 12}
           break
         case "KeyS":
-          console.log("Q-")
+          console.log("前の画像へ")
           imageInd.value--
           if(imageInd.value<0){imageInd.value=0}
           break
         case "KeyH":
           showHeader.value = !showHeader.value
-          if(!showHeader.value){alert("push h to show again")}
+          if(!showHeader.value){alert("push H to show again")}
           console.log("toggle navbar")
           break
       }
     }
 
-    //モーダルらへん
-    const modalId = ref(0)
-    const modalResult = ref()
-    const modalImage = ref()
+    //Resultモーダル
     const modalRef = ref()
     const openModal = (e) => {
       modalRef.value.openModal(e)
@@ -130,9 +127,6 @@ export default defineComponent({
       cameraWidth,
       pictureResult,
       openModal,
-      modalId,
-      modalResult,
-      modalImage,
       modalRef,
     }
   }

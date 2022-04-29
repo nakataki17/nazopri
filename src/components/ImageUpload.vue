@@ -69,10 +69,9 @@ export default defineComponent({
     //QRのせってい
     const picb64 = ref()
     const qrb64 = ref()
-    const value = ref("noimage")
+    const pictureURL = ref("noimage")
+    const QRURL = ref("noimage")
     const size = 300
-    const QRfilename = "latest_QR.png"
-    const QRRef = cloudref(storage,QRfilename)
 
     const makeImage = () =>{
       let img = new Image()
@@ -93,17 +92,19 @@ export default defineComponent({
 
     const sendImage = () =>{
       const b64 = picb64.value      
-      const randomtext = (function(){
+      const generateRandomText = (function(){
         let S="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let N=32
         return Array.from(crypto.getRandomValues(new Uint8Array(N))).map((n)=>S[n%S.length]).join('')
-      })()
+      })
       //picture_(ランダム32文字)
-      const filename = "picture_"+randomtext
-
+      const filename = "picture_"+generateRandomText()
+      //QRコードのファイル名変更
+      const QRfilename = "QR_"+generateRandomText()
       const imageRef = cloudref(storage,filename+".png")
-      const fileURL = "https://storage.googleapis.com/nazopri-399e3.appspot.com/"+filename+".png"
-      value.value = fileURL
+      const QRRef = cloudref(storage,QRfilename+".png")
+      pictureURL.value = "https://storage.googleapis.com/nazopri-399e3.appspot.com/"+filename+".png"
+      QRURL.value = "https://storage.googleapis.com/nazopri-399e3.appspot.com/"+QRfilename+".png"
       //const file = storage.bucket('nazopri-399e3.appspot.com').file(filename+".png");
       uploadString(imageRef, b64, 'data_url',metadata).then((snapshot) => {
         if(snapshot){
@@ -116,7 +117,7 @@ export default defineComponent({
         qrb64.value = cvs.toDataURL("image/png");
         uploadString(QRRef, qrb64.value, 'data_url',metadata).then((snapshot) => {
         if(snapshot){
-        console.log('QRコードの更新を完了,URLは\nhttps://storage.googleapis.com/nazopri-399e3.appspot.com/'+QRfilename);
+        console.log('QRコードの更新を完了,URLは\nhttps://storage.googleapis.com/nazopri-399e3.appspot.com/'+QRfilename+".png");
         }
       });
       }, 3000);
@@ -148,22 +149,23 @@ export default defineComponent({
           }
       }
 
-      //送信するデータ
+      //Slackに送信するデータ
 
       var params = new URLSearchParams();
-      params.append('value1', value.value);
+      params.append('value1', pictureURL.value);
       params.append('value2', 'test');
+      params.append("value3",QRURL.value);
 
       const main = async () => {
           const res = await axios.post(URL, params, config)
           console.log(res)
-          console.log(value.value)
+          console.log(pictureURL.value)
       }
       main()
     }
      
     return{
-      value,
+      pictureURL,
       size,
       sendPic,
       sendExecute,
