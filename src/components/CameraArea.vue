@@ -1,7 +1,8 @@
 <template>
     <div class="w-full camera m-auto text-center ">
-      <video ref="video" id="camera" class="lg:w-3/5 text-center mx-auto object-fill" playsinline autoplay></video>
-      <label for="viewPic" class="btn modal-button text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">View Photo(press Q to take one)</label>
+      <!--カメラ本体-->
+      <video ref="video" id="camera" class="lg:w-3/5 text-center mx-auto object-fill -scale-x-100" playsinline autoplay></video>
+      <!--<label for="viewPic" class="btn modal-button text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">View Photo(press Q to take one)</label>-->
       <!--モーダルの中身-->
         <input type="checkbox" id="viewPic" class="modal-toggle">
         <div class="modal">
@@ -18,6 +19,7 @@
     <canvas ref="canvas" id="canvas" class="invisible fixed left-0 top-0"></canvas>
 
 </template>
+
 
 <script>
 import { defineComponent, onMounted, ref } from "vue";
@@ -39,7 +41,6 @@ export default defineComponent({
     const correctShutter = new Audio(require("@/assets/Sound/カシャピンポン.mp3"))
     const wrongShutter = new Audio(require("@/assets/Sound/カシャブー.mp3"))
 
-    console.log(props)
     const takePhoto = ((e) =>{
       const code = e.code
       console.log(code)

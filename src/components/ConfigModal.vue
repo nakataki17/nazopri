@@ -50,6 +50,7 @@
 
 <script>
 import { defineComponent, computed,reactive ,ref} from '@vue/runtime-core'
+import questionData from "../assets/questionData/questions.json";
 
 export default defineComponent({
   name: 'ConfigModal',
@@ -60,7 +61,6 @@ export default defineComponent({
     course :String,
     playsSound :Boolean,
     stopTime :Number,
-    qcnt: Object,
     cameraHeight: Number,
     cameraWidth: Number,
   },
@@ -95,6 +95,7 @@ export default defineComponent({
       set: (value) => {
         config.course = value
         context.emit("update:config",{changeName:"course",value:value})
+        localStorage.course = value
       }
     })
 
@@ -123,7 +124,7 @@ export default defineComponent({
     })
 
 
-    const courseName = Object.keys(props.qcnt)
+    const courseName = Object.keys(questionData)
     return{
       config,
       soundComp,

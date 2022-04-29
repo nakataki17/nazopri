@@ -7,8 +7,9 @@
     </a>
   </div>
   <div class="navbar-end">
-    <ResultModal v-bind="{pictureResult}" />
-    <ConfigModal v-bind="{playsSound,stopTime,course,qcnt,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
+    <ResultModal v-bind="{pictureResult}" @openModal="emitOpenModal" />
+    <ImageUpload></ImageUpload>
+    <ConfigModal v-bind="{playsSound,stopTime,course,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   </div>
 
 </div>
@@ -18,25 +19,26 @@
 <script>
 import { defineComponent, reactive, } from "vue";
 import ConfigModal from './ConfigModal.vue'
-import ResultModal from './ResultModal.vue'
+import ResultModal from "./ResultModal.vue";
+import ImageUpload from "./ImageUpload.vue";
 
 export default defineComponent({
   name: "NavigationBar",
   components:{
     ConfigModal,
-    ResultModal
+    ResultModal,
+    ImageUpload,
 },
   props:{
     course :String,
     playsSound :Boolean,
     stopTime :Number,
     showHeader : Boolean,
-    qcnt: Object,
     cameraHeight: Number,
     cameraWidth: Number,
     pictureResult:Array,
   },
-  emits:["update:config"],
+  emits:["update:config","openModal"],
   setup(props,context) {
     console.log(props.course)
     const config = reactive({
@@ -49,10 +51,14 @@ export default defineComponent({
       context.emit("update:config",e)
     }
 
+    const emitOpenModal = (e) => {
+      context.emit("openModal",e)
+    }
 
     return{
       config,
       updateConfig,
+      emitOpenModal,
     }
   },
 })

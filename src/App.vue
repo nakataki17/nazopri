@@ -1,8 +1,9 @@
 <template>
-  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,qcnt,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig}"/>
-  <main class="flex flex-wrap h-full">
+  <ResultCard ref="modalRef" v-bind="{pictureResult:pictureResult}"></ResultCard>
+  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
+  <main class="flex flex-wrap h-full  items-center" >
       <div class="h-5/6 lg:w-1/2  mx-auto ">
-        <QuestionArea  :course="course" :qno="qno" :qcnt="qcnt" :keyboardPress="keyboardPress" />
+        <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 lg:w-1/2  text-center mx-auto">
         <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
@@ -16,7 +17,8 @@ import { defineComponent, ref } from '@vue/runtime-core'
 import CameraArea from './components/CameraArea.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
-import {noImage} from "./assets/noImage.json"
+import {placeHolder} from "./assets/noImage.json"
+import ResultCard from './components/ResultCard.vue'
 
 export default defineComponent({
   name: 'App',
@@ -24,7 +26,9 @@ export default defineComponent({
     CameraArea,
     NavigationBar,
     QuestionArea,
+    ResultCard,
   },
+  emits:[],
   setup(){   
     //写真と正誤判定の保存
     const pictureResult  = ref([])
@@ -34,36 +38,34 @@ export default defineComponent({
     if(localStorage.cameraWidth){
       cameraWidth.value = localStorage.cameraWidth
     }else{
-      cameraWidth.value = 480
+      localStorage.cameraWidth = 720
+      cameraWidth.value = 720
     }
     if(localStorage.cameraHeight){
       cameraHeight.value = localStorage.cameraHeight
     }else{
+      localStorage.cameraHeight = 720
       cameraHeight.value = 720
     }
 
-    let qno = ref("1")
-    //枚数
-    let qcnt = ref({
-      "Cool":9,
-      "Crazy":9,
-      "Hard":10,
-      "Lovely":9,
-      "Standard":9,
-      "Cute":12,
-    })
+    let imageInd = ref("1")
     //設定項目
-    let course = ref(Object.keys(qcnt.value)[0])
+    if(!localStorage.course){
+      localStorage.course = "Cool"
+    }
+    let course = ref(localStorage.course)
     let playsSound = ref(true)
     let stopTime = ref(1500)
-    let latastImage = ref(noImage)
+    let latastImage = ref(placeHolder)
     let showHeader = ref(true)
 
   
     const saveImage = (e) =>{
       latastImage.value = e.picture
+      localStorage.latastImage = latastImage.value
       pictureResult.value.push(e)
     }
+
 
 
     const updateConfig = (e)=> {
@@ -85,31 +87,36 @@ export default defineComponent({
       const code = e.code
       switch (code){
         case "KeyW":
-          console.log("Q+")
-          qno.value++
-          if(qno.value>qcnt.value[course.value]){
-            qno.value-- 
-          }
+          console.log("次の画像へ")
+          imageInd.value++
+          if(imageInd.value>12){imageInd.value = 12}
           break
         case "KeyS":
-          console.log("Q-")
-          qno.value--
-          if(qno.value<=0){qno.value=1}
+          console.log("前の画像へ")
+          imageInd.value--
+          if(imageInd.value<0){imageInd.value=0}
           break
         case "KeyH":
           showHeader.value = !showHeader.value
-          if(!showHeader.value){alert("push h to show again")}
+          if(!showHeader.value){alert("push H to show again")}
           console.log("toggle navbar")
           break
       }
     }
+
+    //Resultモーダル
+    const modalRef = ref()
+    const openModal = (e) => {
+      modalRef.value.openModal(e)
+    }
+
     document.addEventListener("keydown",keyboardPress)
+
 
     return{
       keyboardPress,
       course,
-      qno,
-      qcnt,
+      imageInd,
       saveImage,
       latastImage,
       playsSound,
@@ -119,6 +126,8 @@ export default defineComponent({
       cameraHeight,
       cameraWidth,
       pictureResult,
+      openModal,
+      modalRef,
     }
   }
 })
