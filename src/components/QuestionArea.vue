@@ -1,5 +1,5 @@
 <template>
-    <div class="w-5/6 h-full mx-auto text-center">
+    <div class="2 h-full mx-auto text-center">
       <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc" alt="">
     </div>
     <div>

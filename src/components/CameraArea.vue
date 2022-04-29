@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full camera m-auto text-center ">
+    <div class=" w-full h-full camera my-auto mx-auto text-center">
       <!--カメラ本体-->
-      <video ref="video" id="camera" class="lg:w-3/5 text-center mx-auto object-fill -scale-x-100" playsinline autoplay></video>
+      <video ref="video" id="camera" class="my-32 text-center object-contain -scale-x-100" playsinline autoplay></video>
       <!--<label for="viewPic" class="btn modal-button text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">View Photo(press Q to take one)</label>-->
       <!--モーダルの中身-->
         <input type="checkbox" id="viewPic" class="modal-toggle">
