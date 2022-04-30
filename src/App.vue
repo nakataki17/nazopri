@@ -1,11 +1,11 @@
-<template>
-  <ResultCard ref="modalRef" v-bind="{pictureResult:pictureResult}"></ResultCard>
-  <NavigationBar v-show="showHeader"  v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
-  <main class="flex flex-wrap h-full  items-center" >
-      <div class="h-5/6 lg:w-1/2  mx-auto ">
+<template>   
+  <ResultModal v-bind="{pictureResult}" @openModal="emitOpenModal" />
+  <NavigationBar v-show="showHeader" v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult,showHeader}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
+  <main class="flex flex-no-wrap  flex-row items-center justify-between pt-24" >
+      <div class="h-5/6 w-7/12 mx-auto ">
         <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
       </div>
-      <div class="h-5/6 lg:w-1/2  text-center mx-auto">
+      <div class="text-center mx-auto ">
         <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
       </div>
   </main>
@@ -18,7 +18,8 @@ import CameraArea from './components/CameraArea.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
 import {placeHolder} from "./assets/noImage.json"
-import ResultCard from './components/ResultCard.vue'
+import ResultModal from './components/ResultModal.vue'
+
 
 export default defineComponent({
   name: 'App',
@@ -26,10 +27,11 @@ export default defineComponent({
     CameraArea,
     NavigationBar,
     QuestionArea,
-    ResultCard,
+    ResultModal,
   },
   emits:[],
   setup(){   
+    
     //写真と正誤判定の保存
     const pictureResult  = ref([])
     //ローカルストレージからカメラ縦横の読み込み
@@ -57,7 +59,7 @@ export default defineComponent({
     let playsSound = ref(true)
     let stopTime = ref(1500)
     let latastImage = ref(placeHolder)
-    let showHeader = ref(true)
+    let showHeader = ref(false)
 
   
     const saveImage = (e) =>{

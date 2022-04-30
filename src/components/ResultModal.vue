@@ -1,17 +1,21 @@
 <template>
 
-<label for="resultModal" class="btn modal-button">Show Result</label>
+<!-- label-- for="resultModal" class="btn modal-button">Show Result</-label -->
 <!-- Modalの中身 -->
 <input type="checkbox" id="resultModal" class="modal-toggle" v-model="isOpen">
 <div class="modal">
-   <div class="modal-box w-11/12 max-h-screen max-w-none ">
-      <div class="grid grid-cols-2 xl:grid-cols-3 gap-4 lg:w-1/2 lg:mx-auto">
-        <div v-for="(item,index) in goodResult" :key="index" :id="'slide'+(index)" class="carousel-item relative w-full">
-        <img class="" :src="'data:'+item.picture" @click="$emit('openModal',{picture:item.picture,result:item.result,id:index})">        
-        </div> 
-      </div>
+   <div class="modal-box w-screen max-h-screen max-w-none">
+   <div class="font-title text-center text-5xl my-10">RESULT</div>
+    <div class="flex flex-row">
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-4 lg:w-7/12 lg:mx-auto">
+          <div v-for="(item,index) in goodResult" :key="index" :id="'slide'+(index)" class="carousel-item relative w-full">
+          <img class="" :src="'data:'+item.picture" @click="$emit('openModal',{picture:item.picture,result:item.result,id:index})">        
+          </div>
+        </div>
+        <img class="text-center .object-contain w-1/4 my-auto"  v-bind:src="imgSrc" alt=""> 
+    </div>
     <div class="modal-action">
-      <label for="resultModal" class="btn">Close!</label>
+      <label for="resultModal" class="btn">Close</label>
     </div>
   </div>
 
@@ -29,15 +33,27 @@ export default defineComponent({
   },
   
   setup(props) {
-    //goodResult:正誤判定のあるresult(Qを除く) 
+    const countScore = (result)=>{
+      let r = result.filter(n=>n.result=="Correct").length
+      if(r>8){r=8}
+      return r
+    }
+
+    const judge = ref(-1)
+    //画像ソース
+    const imgSrc = ref(require("@/assets/Scores/point_"+0+".png") )
+
+    //goodResult:正誤判定のあるresult 変更があるたびに走る(Qを除く) 
     const goodResult = ref(props.pictureResult.filter(item=>item.result))
     watchEffect(()=>{
+      //pictureResultの変更を監視してgoodresultとimgsrcを更新
       goodResult.value = props.pictureResult.filter(item=>item.result)
       if(goodResult.value[0]){
         judge.value = ref(goodResult.value[0].result)
+        const score = countScore(goodResult.value)
+        imgSrc.value = require("@/assets/Scores/point_"+score+".png")
       }
     })
-    const judge = ref()
     onMounted(() => {
 //        document.addEventListener("keydown",props.keyboardPress)
       console.log("mounted modal")
@@ -67,6 +83,7 @@ export default defineComponent({
     document.addEventListener("keydown",keyboardPress)
 
     return{
+      imgSrc,
       goodResult,
       judge,
       getPicNum,
