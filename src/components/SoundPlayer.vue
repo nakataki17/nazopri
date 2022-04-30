@@ -50,20 +50,21 @@ export default defineComponent({
     })
 
     watchEffect(()=>{
-      if(props.time == questionData[props.course][props.imageInd]["制限時間"] && -1 in voiceData[props.course][props.imageInd] ){
-        const fileName = voiceData[props.course][props.imageInd][-1]["ファイル名"]
-      setTimeout(()=>{
-        audioList[fileName].play()
-      },500)
-      }else{
-      if(props.time in voiceData[props.course][props.imageInd] && props.time > -1){
-      const fileName = voiceData[props.course][props.imageInd][props.time]["ファイル名"]
-      console.log(audioList[fileName])
-      setTimeout(()=>{
-        audioList[fileName].play()
-      },500)
-      }}
-
+      if(props.imageInd != 0){
+        if(props.time == questionData[props.course][props.imageInd]["制限時間"] && -1 in voiceData[props.course][props.imageInd] ){
+          const fileName = voiceData[props.course][props.imageInd][-1]["ファイル名"]
+          setTimeout(()=>{
+            audioList[fileName].play()
+          },500)
+        }else{
+        if(props.time in voiceData[props.course][props.imageInd] && props.time > -1){
+          const fileName = voiceData[props.course][props.imageInd][props.time]["ファイル名"]
+          console.log(audioList[fileName])
+          setTimeout(()=>{
+            audioList[fileName].play()
+        },500)
+        }}
+      }
     })
 
     return{   
