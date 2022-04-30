@@ -50,7 +50,7 @@ export default defineComponent({
       cameraHeight.value = 720
     }
 
-    let imageInd = ref("1")
+    let imageInd = ref(1)
     //設定項目
     if(!localStorage.course){
       localStorage.course = "Cool"
@@ -80,6 +80,7 @@ export default defineComponent({
           break
         case "course":
           course.value = e.value
+          imageInd.value = 1
       }
     }
 
