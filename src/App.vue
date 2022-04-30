@@ -20,6 +20,7 @@ import QuestionArea from './components/QuestionArea.vue'
 import {placeHolder} from "./assets/noImage.json"
 import ResultModal from './components/ResultModal.vue'
 
+
 export default defineComponent({
   name: 'App',
   components: {
@@ -30,6 +31,7 @@ export default defineComponent({
   },
   emits:[],
   setup(){   
+    
     //写真と正誤判定の保存
     const pictureResult  = ref([])
     //ローカルストレージからカメラ縦横の読み込み

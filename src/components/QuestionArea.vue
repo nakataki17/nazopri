@@ -1,4 +1,5 @@
 <template>
+    <SoundPlayer v-bind="{course,imageInd,time}"></SoundPlayer>
     <div class="2 h-full mx-auto text-center">
       <img class=" text-center  mx-auto my-auto"  v-bind:src="imgSrc" alt="">
     </div>
@@ -14,6 +15,8 @@
 <script>
 import { defineComponent, onMounted, ref, watchEffect} from "vue";
 import questionData from "../assets/questionData/questions.json";
+import SoundPlayer from "./SoundPlayer.vue";
+
 
 export default defineComponent({
   name: "QuestionArea",
@@ -22,7 +25,9 @@ export default defineComponent({
     imageInd: Number,
     keyboardPress: Function
   },
-
+  components:{
+    SoundPlayer,
+  },
   setup(props) {
     //こいつは常に一意のはず
     const timerID = ref()
