@@ -1,7 +1,7 @@
 <template>
   <canvas ref="sendPic" class="invisible fixed left-0 top-0 z-[1000]"></canvas>
   <label  class="btn modal-button " v-bind:class="{'animate-bounce':isSending}" @click="sendExecute">PRINT!</label>
-  <qrcode-vue :value="QRURL" :size="size" level="M" margin="3" class="invisible fixed" id="qrcanvas"></qrcode-vue>
+  <qrcode-vue :value="pictureURL" :size="size" level="M" margin="3" class="invisible fixed" id="qrcanvas"></qrcode-vue>
   <!-- Put this part before </body> tag -->
   <input ref="checkbox" type="checkbox" id="qr-modal" class="modal-toggle">
   <div class="modal">
