@@ -7,20 +7,22 @@
     <input type="checkbox" id="configModal" class="modal-toggle" v-model="isOpen">
     <div class="modal">
       <div class="modal-box">
-      <button class="btn" v-on:click="setCourse('Standard')">スタンダード</button>
-      <button class="btn btn-primary"  v-on:click="setCourse('Hard')">ハード</button>
-      <button class="btn btn-secondary" v-on:click="setCourse('Crazy')">クレイジー</button>
-      <button class="btn btn-accent" v-on:click="setCourse('Cool')">クール</button>
-      <button class="btn btn-error" v-on:click="setCourse('lovely')">ラブリー</button>
-
+      <div class="label-text">コース選択</div>
+      <div class="flex justify-between">
+        <button class="btn" v-on:click="setCourse('Standard')">スタンダード</button>
+        <button class="btn btn-primary"  v-on:click="setCourse('Hard')">ハード</button>
+        <button class="btn btn-secondary" v-on:click="setCourse('Crazy')">クレイジー</button>
+        <button class="btn btn-accent" v-on:click="setCourse('Cool')">クール</button>
+        <button class="btn btn-error" v-on:click="setCourse('lovely')">ラブリー</button>
+      </div>
 
       <!-- TODO : v-for を用いた状態管理-->
-      <div class="flex justify-between">
+      <!--div class="flex justify-between">
         <span class="my-auto label-text">コース</span>
         <select class="select  max-w-xs" v-model="courseComp">
           <option v-for="course in courseName" :key="course">{{course}}</option>
         </select>
-      </div>
+      </!div-->
       <div class="flex justify-between mb-2">
       <span class="label-text">一時停止時間</span>
       <a>{{config.stopTime/1000}} sec</a>
@@ -106,6 +108,8 @@ export default defineComponent({
     })
 
     const setCourse = (cname)=>{
+        alert(`コースを ${cname} に変更します(Enterで閉じる)`)
+        //ここにプリロード処理を入れる
         config.course = cname
         context.emit("update:config",{changeName:"course",value:cname})
         localStorage.course = cname
