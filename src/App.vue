@@ -1,6 +1,8 @@
 <template>   
+  <ConfigModal ref="configRef" v-bind="{playsSound,stopTime,course,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
+  <ImageUpload ref="printRef"></ImageUpload>
   <ResultModal ref="resultRef" v-bind="{pictureResult}" @openModal="emitOpenModal" />
-  <NavigationBar v-show="showHeader" v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult,showHeader}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
+  <NavigationBar ref="navBarRef" v-show="showHeader" v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult,showHeader}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-no-wrap  flex-row items-center justify-between pt-24" >
       <div class="h-5/6 w-7/12 mx-auto ">
         <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
@@ -19,6 +21,8 @@ import NavigationBar from './components/NavigationBar.vue'
 import QuestionArea from './components/QuestionArea.vue'
 import {placeHolder} from "./assets/noImage.json"
 import ResultModal from './components/ResultModal.vue'
+import ImageUpload from './components/ImageUpload.vue'
+import ConfigModal from './components/ConfigModal.vue'
 
 
 export default defineComponent({
@@ -28,6 +32,8 @@ export default defineComponent({
     NavigationBar,
     QuestionArea,
     ResultModal,
+    ImageUpload,
+    ConfigModal
   },
   emits:[],
   setup(){   
@@ -85,10 +91,13 @@ export default defineComponent({
     }
 
 
-    //Resultモーダル
-    
+    //子要素
     const resultRef = ref()
-    
+    const navBarRef = ref()
+    const printRef = ref()
+    const configRef = ref()
+
+
     const keyboardPress = (e) => { 
       const code = e.code
       switch (code){
@@ -103,17 +112,21 @@ export default defineComponent({
           if(imageInd.value<0){imageInd.value=0}
           break
         case "KeyH":
-          showHeader.value = !showHeader.value
-          if(!showHeader.value){alert("push H to show again")}
-          console.log("toggle navbar")
+          configRef.value.toggleConfig()
           break
-        case "KeyR":
+        case "KeyT":
           resultRef.value.toggleResultStat()
+          console.log("show Result")
+          break
+        case "KeyP":
+          printRef.value.sendExecute()
+          console.log("print start")
+          break
+  
       }
     }
-
+    
     document.addEventListener("keydown",keyboardPress)
-
 
     return{
       keyboardPress,
@@ -128,8 +141,10 @@ export default defineComponent({
       cameraHeight,
       cameraWidth,
       pictureResult,
-      openModal,
-      modalRef,
+      resultRef,
+      navBarRef,
+      printRef,
+      configRef
     }
   }
 })

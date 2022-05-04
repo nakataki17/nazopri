@@ -1,21 +1,13 @@
 <template>
 
-<!-- label-- for="resultModal" class="btn modal-button">Show Result</-label -->
+<!-- label-- for="courseSelect" class="btn modal-button">Show Result</-label -->
 <!-- Modalの中身 -->
-<input type="checkbox" id="resultModal" class="modal-toggle" v-model="isOpen">
+<input type="checkbox" id="courseSelect" class="modal-toggle" v-model="isOpen">
 <div class="modal">
-   <div class="modal-box w-screen max-h-screen max-w-none">
-   <div class="font-title text-center text-5xl my-10">RESULT</div>
-    <div class="flex flex-row">
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-4 lg:w-7/12 lg:mx-auto">
-          <div v-for="(item,index) in goodResult" :key="index" :id="'slide'+(index)" class="carousel-item relative w-full">
-          <img class="" :src="'data:'+item.picture" @click="$emit('openModal',{picture:item.picture,result:item.result,id:index})">        
-          </div>
-        </div>
-        <img class="text-center .object-contain w-1/4 my-auto"  v-bind:src="imgSrc" alt=""> 
-    </div>
+  <div class="modal-box">
+    
     <div class="modal-action">
-      <label for="resultModal" class="btn">Close</label>
+      <label for="courseSelect" class="btn">Close</label>
     </div>
   </div>
 

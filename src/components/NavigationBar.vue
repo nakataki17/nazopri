@@ -7,7 +7,6 @@
     </a>
   </div>
   <div class="navbar-end">
-    <ImageUpload></ImageUpload>
     <ConfigModal v-bind="{playsSound,stopTime,course,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   </div>
 
@@ -18,13 +17,11 @@
 <script>
 import { defineComponent, reactive, } from "vue";
 import ConfigModal from './ConfigModal.vue'
-import ImageUpload from "./ImageUpload.vue";
 
 export default defineComponent({
   name: "NavigationBar",
   components:{
     ConfigModal,
-    ImageUpload,
 },
   props:{
     course :String,
@@ -37,7 +34,6 @@ export default defineComponent({
   },
   emits:["update:config","openModal"],
   setup(props,context) {
-    console.log(props.course)
     const config = reactive({
       course: props.course,
       playsSound: props.playsSound,
@@ -47,6 +43,7 @@ export default defineComponent({
     const updateConfig = (e)=> {
       context.emit("update:config",e)
     }
+
 
     return{
       config,

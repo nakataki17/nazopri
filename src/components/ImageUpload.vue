@@ -1,11 +1,7 @@
 <template>
   <canvas ref="sendPic" class="invisible fixed left-0 top-0 z-[1000]"></canvas>
-  <label  class="btn modal-button " v-bind:class="{'animate-bounce':isSending}" @click="sendExecute">PRINT!</label>
-<<<<<<< HEAD
-  <qrcode-vue :value="QRURL" :size="size" level="M" margin="3" class="invisible fixed" id="qrcanvas"></qrcode-vue>
-=======
+  <label  class="btn modal-button invisible" v-bind:class="{'animate-bounce':isSending}" @click="sendExecute">PRINT!</label>
   <qrcode-vue :value="pictureURL" :size="size" level="M" margin="3" class="invisible fixed" id="qrcanvas"></qrcode-vue>
->>>>>>> f03cee5dd17dda0a317e0a73cf296b5a86027546
   <!-- Put this part before </body> tag -->
   <input ref="checkbox" type="checkbox" id="qr-modal" class="modal-toggle">
   <div class="modal">
@@ -44,6 +40,7 @@ export default defineComponent({
     const sendPic = ref()
     const checkbox = ref()
     const isSending = ref(false)
+    const hello = ()=>console.log(1903284)
 
     // Set the configuration for your app
     // TODO: Replace with your app's config object
@@ -122,6 +119,7 @@ export default defineComponent({
         uploadString(QRRef, qrb64.value, 'data_url',metadata).then((snapshot) => {
         if(snapshot){
         console.log('QRコードの更新を完了,URLは\nhttps://storage.googleapis.com/nazopri-399e3.appspot.com/'+QRfilename+".png");
+        isSending.value = false
         }
       });
       }, 3000);
@@ -134,6 +132,12 @@ export default defineComponent({
         sendImage()
         sendWebhook()
       },2000)
+      setTimeout(()=>{
+        if(isSending.value){
+          alert("異常発生！もう一度Printを行ってください")
+          isSending.value = false
+        }
+      },7000)
     }
 
     watch(qrb64,()=>{
@@ -177,7 +181,8 @@ export default defineComponent({
       qrb64,
       checkbox,
       isSending,
-      QRURL
+      QRURL,
+      hello,
     }
   }
 })

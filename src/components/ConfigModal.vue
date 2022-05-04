@@ -1,10 +1,10 @@
 <template>
   <div>
-      <label for="configModal" class="btn modal-button text-white 
+      <!--label for="configModal" class="btn modal-button text-white 
       bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 
-      font-medium rounded-lg text-sm px-5 py-2.5 text-center">CONFIG</label>
+      font-medium rounded-lg text-sm px-5 py-2.5 text-center">CONFIG</!--label-->
   <!--モーダルの中身-->
-    <input type="checkbox" id="configModal" class="modal-toggle">
+    <input type="checkbox" id="configModal" class="modal-toggle" v-model="isOpen">
     <div class="modal">
       <div class="modal-box">
       <div class="form-control">
@@ -66,6 +66,11 @@ export default defineComponent({
   },
 
   setup(props,context){
+    //開閉管理
+    const isOpen = ref(false)
+    const toggleConfig = ()=>{isOpen.value = !isOpen.value}
+
+
     const curCameraHeight = ref(props.cameraHeight)
     const curCameraWidth = ref(props.cameraWidth)
     const config = reactive({
@@ -135,7 +140,9 @@ export default defineComponent({
       cameraHeightChange,
       curCameraWidth,
       curCameraHeight,
-      setCameraDefault
+      setCameraDefault,
+      isOpen,
+      toggleConfig
     }
   }
 })
