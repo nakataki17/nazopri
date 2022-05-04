@@ -7,12 +7,13 @@
     <input type="checkbox" id="configModal" class="modal-toggle" v-model="isOpen">
     <div class="modal">
       <div class="modal-box">
-      <div class="form-control">
-        <label class="label cursor-pointer">
-          <span class="label-text">シャッター音</span> 
-          <input type="checkbox" class="toggle" v-model="soundComp">
-        </label>
-      </div>
+      <button class="btn" v-on:click="setCourse('Standard')">スタンダード</button>
+      <button class="btn btn-primary"  v-on:click="setCourse('Hard')">ハード</button>
+      <button class="btn btn-secondary" v-on:click="setCourse('Crazy')">クレイジー</button>
+      <button class="btn btn-accent" v-on:click="setCourse('Cool')">クール</button>
+      <button class="btn btn-error" v-on:click="setCourse('lovely')">ラブリー</button>
+
+
       <!-- TODO : v-for を用いた状態管理-->
       <div class="flex justify-between">
         <span class="my-auto label-text">コース</span>
@@ -104,6 +105,12 @@ export default defineComponent({
       }
     })
 
+    const setCourse = (cname)=>{
+        config.course = cname
+        context.emit("update:config",{changeName:"course",value:cname})
+        localStorage.course = cname
+    }
+
     const cameraWidthChange = computed({
       get: ()=> curCameraWidth.value,
       set: (value) => {
@@ -142,7 +149,8 @@ export default defineComponent({
       curCameraHeight,
       setCameraDefault,
       isOpen,
-      toggleConfig
+      toggleConfig,
+      setCourse
     }
   }
 })
