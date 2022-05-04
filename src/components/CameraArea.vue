@@ -43,7 +43,6 @@ export default defineComponent({
 
     const takePhoto = ((e) =>{
       const code = e.code
-      console.log(code)
       if(code == "KeyQ" || code=="KeyO" || code=="KeyX" ){
         //canvasの準備
         canvas.value.width = Math.max(200, video.value.videoWidth)

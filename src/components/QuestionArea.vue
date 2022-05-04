@@ -32,6 +32,7 @@ export default defineComponent({
     //こいつは常に一意のはず
     const timerID = ref()
     const time = ref(999)
+    const questionInd = ref()
 
     onMounted(() => {
 //        document.addEventListener("keydown",props.keyboardPress)
@@ -56,7 +57,8 @@ export default defineComponent({
 
     const changeImage = ()=>{
       const questionInfo = questionData[props.course]
-      const {"制限時間":timeLimit, "ファイル名":fileName} = questionInfo[props.imageInd]
+      const {"制限時間":timeLimit, "ファイル名":fileName,"問題番号":qInd} = questionInfo[props.imageInd]
+      questionInd.value = qInd
       imgSrc.value = require("@/assets/Images/"+fileName)
       if(timeLimit==-1){
         startTimer(100)//ダミー処理
@@ -78,7 +80,8 @@ export default defineComponent({
       timerID,
       imgSrc, 
       startTimer,
-      time
+      time,
+      questionInd
     }
   },
 })

@@ -4,10 +4,10 @@
   <ResultModal ref="resultRef" v-bind="{pictureResult}" @openModal="emitOpenModal" />
   <NavigationBar ref="navBarRef" v-show="showHeader" v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult,showHeader}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-no-wrap  flex-row items-center justify-between pt-24" >
-      <div class="h-5/6 w-7/12 mx-auto ">
-        <QuestionArea  :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
+      <div class="h-5/6 w-5/12 mx-auto ">
+        <QuestionArea ref="questionRef" :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
       </div>
-      <div class="text-center mx-auto ">
+      <div class="h-5/6 text-center mx-auto ">
         <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
       </div>
   </main>
@@ -40,6 +40,7 @@ export default defineComponent({
     
     //写真と正誤判定の保存
     const pictureResult  = ref([])
+    for(let i = 0;i<8;i++){pictureResult.value.push({"picture":placeHolder,"result":"Wrong"})}
     //ローカルストレージからカメラ縦横の読み込み
     const cameraWidth = ref()
     const cameraHeight = ref()
@@ -71,7 +72,10 @@ export default defineComponent({
     const saveImage = (e) =>{
       latastImage.value = e.picture
       localStorage.latastImage = latastImage.value
-      pictureResult.value.push(e)
+      if(questionRef.value.questionInd>-1){
+      pictureResult.value.splice(questionRef.value.questionInd-1, 1, e)
+      }
+      console.log(pictureResult)
     }
 
 
@@ -87,6 +91,9 @@ export default defineComponent({
         case "course":
           course.value = e.value
           imageInd.value = 0
+          pictureResult.value = []
+          for(let i = 0;i<8;i++){pictureResult.value.push({"picture":placeHolder,"result":"Wrong"})}
+
       }
     }
 
@@ -96,6 +103,7 @@ export default defineComponent({
     const navBarRef = ref()
     const printRef = ref()
     const configRef = ref()
+    const questionRef = ref()
 
 
     const keyboardPress = (e) => { 
@@ -144,7 +152,8 @@ export default defineComponent({
       resultRef,
       navBarRef,
       printRef,
-      configRef
+      configRef,
+      questionRef
     }
   }
 })

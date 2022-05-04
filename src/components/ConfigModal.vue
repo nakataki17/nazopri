@@ -108,10 +108,11 @@ export default defineComponent({
     })
 
     const setCourse = (cname)=>{
-        alert(`コースを ${cname} に変更します(Enterで閉じる)`)
+        alert(`コースを ${cname} に変更し、結果をリセットします(Enterで閉じる)`)
         //ここにプリロード処理を入れる
         config.course = cname
         context.emit("update:config",{changeName:"course",value:cname})
+        
         localStorage.course = cname
     }
 
