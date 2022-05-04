@@ -1,16 +1,18 @@
 <template>   
+  <main class="flex flex-no-wrap  flex-row items-center justify-between" >
+      <div class="h-5/6 w-1/2 mx-auto ">
+        <QuestionArea ref="questionRef" :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
+      </div>
+      <div class="h-5/6 w-5/12 text-center mx-auto ">
+        <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
+      </div>
+  
+  </main>  
   <ConfigModal ref="configRef" v-bind="{playsSound,stopTime,course,cameraHeight,cameraWidth}" v-on="{'update:config':updateConfig}"></ConfigModal>
   <ImageUpload ref="printRef"></ImageUpload>
   <ResultModal ref="resultRef" v-bind="{pictureResult}" @openModal="emitOpenModal" />
   <NavigationBar ref="navBarRef" v-show="showHeader" v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult,showHeader}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
-  <main class="flex flex-no-wrap  flex-row items-center justify-between pt-24" >
-      <div class="h-5/6 w-5/12 mx-auto ">
-        <QuestionArea ref="questionRef" :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
-      </div>
-      <div class="h-5/6 text-center mx-auto ">
-        <CameraArea @tookPhoto="saveImage" v-bind="{latastImage,playsSound,stopTime,cameraHeight,cameraWidth}" />
-      </div>
-  </main>
+
 
 </template>
 
