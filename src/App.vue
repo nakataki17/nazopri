@@ -1,5 +1,5 @@
 <template>   
-  <ResultModal v-bind="{pictureResult}" @openModal="emitOpenModal" />
+  <ResultModal ref="resultRef" v-bind="{pictureResult}" @openModal="emitOpenModal" />
   <NavigationBar v-show="showHeader" v-bind="{playsSound,stopTime,course,showHeader,cameraHeight,cameraWidth,pictureResult,showHeader}" v-on="{'update:config':updateConfig,'openModal':openModal}"/>
   <main class="flex flex-no-wrap  flex-row items-center justify-between pt-24" >
       <div class="h-5/6 w-7/12 mx-auto ">
@@ -85,6 +85,9 @@ export default defineComponent({
     }
 
 
+    //Resultモーダル
+    
+    const resultRef = ref()
     
     const keyboardPress = (e) => { 
       const code = e.code
@@ -104,13 +107,9 @@ export default defineComponent({
           if(!showHeader.value){alert("push H to show again")}
           console.log("toggle navbar")
           break
+        case "KeyR":
+          resultRef.value.toggleResultStat()
       }
-    }
-
-    //Resultモーダル
-    const modalRef = ref()
-    const openModal = (e) => {
-      modalRef.value.openModal(e)
     }
 
     document.addEventListener("keydown",keyboardPress)

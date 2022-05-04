@@ -71,11 +71,15 @@ export default defineComponent({
       isOpen.value=b
     }
 
+    const toggleResultStat = ()=>{
+      isOpen.value = !isOpen.value
+    }
+
     
     const keyboardPress = (e) => { 
       const code = e.code
       switch (code){
-        case "KeyR":
+        case "Key3R":
           setModalStat(!isOpen.value)
       }
     }
@@ -89,7 +93,8 @@ export default defineComponent({
       getPicNum,
       isOpen,
       setModalStat,
-      keyboardPress     
+      keyboardPress,
+      toggleResultStat     
     }
   },
 })

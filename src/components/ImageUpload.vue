@@ -1,12 +1,12 @@
 <template>
   <canvas ref="sendPic" class="invisible fixed left-0 top-0 z-[1000]"></canvas>
   <label  class="btn modal-button " v-bind:class="{'animate-bounce':isSending}" @click="sendExecute">PRINT!</label>
-  <qrcode-vue :value="value" :size="size" level="M" margin="3" class="invisible fixed" id="qrcanvas"></qrcode-vue>
+  <qrcode-vue :value="QRURL" :size="size" level="M" margin="3" class="invisible fixed" id="qrcanvas"></qrcode-vue>
   <!-- Put this part before </body> tag -->
   <input ref="checkbox" type="checkbox" id="qr-modal" class="modal-toggle">
   <div class="modal">
    <div class="modal-box w-11/12 max-h-screen max-w-none ">
-      <div class="text-center font-title">遊んでくれてありがとう!QRコードから写真が保存できるよ！</div>
+      <div class="text-center font-title">遊んでくれてありがとう!QRコードから写真が保存できるよ！{{QRURL}}</div>
 
       <div class="flex justify-center">
         <img class="object-contain" :src="picb64">
@@ -172,7 +172,8 @@ export default defineComponent({
       picb64,
       qrb64,
       checkbox,
-      isSending
+      isSending,
+      QRURL
     }
   }
 })
