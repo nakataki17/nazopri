@@ -7,7 +7,7 @@
       <span class="countdown font-mono text-9xl flex justify-center scale-150 mt-9" v-if="time>=-1">
         <span v-bind:style="'--value:'+time+';'" v-bind:class="{'text-red-500':time<=5, 'text-white':imageInd>12}" ></span>
       </span>
-      <span class="text-red-500 font-title text-7xl flex justify-center" v-else>Time's up!</span>      
+      <i class="text-red-500 font-title text-[200px] las la-camera flex justify-center" v-else></i>      
     </div>
 
 </template>
@@ -46,7 +46,7 @@ export default defineComponent({
       clearInterval(timerID.value)
       time.value = length
       timerID.value = setInterval(()=>{
-        if(time.value > -1 ){
+        if(time.value > 0 ){
           time.value--
         }else{
           time.value--
