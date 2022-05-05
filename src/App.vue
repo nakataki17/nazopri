@@ -1,6 +1,6 @@
 <template>   
   <main class="flex flex-no-wrap  flex-row items-center justify-between" >
-      <div class="h-5/6 w-1/2 mx-auto ">
+      <div class="mt-0 h-5/6 w-1/2 mx-auto ">
         <QuestionArea ref="questionRef" :course="course" :imageInd="imageInd" :keyboardPress="keyboardPress" />
       </div>
       <div class="h-5/6 w-5/12 text-center mx-auto ">
